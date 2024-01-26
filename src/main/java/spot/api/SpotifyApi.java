@@ -26,10 +26,11 @@ import spot.api.model.Token;
 import spot.api.model.TopTracks;
 
 public class SpotifyApi {
-	
+
+	private ResourceBundle CONFIG = ResourceBundle.getBundle("config");
+
 	private static final String API_URL = "https://api.spotify.com/v1/";
 	private static final String ACCOUNTS_URL = "https://accounts.spotify.com/api/token";
-	private ResourceBundle BUNDLE = ResourceBundle.getBundle("config");
 
 	private OkHttpClient client;
 	private Gson gson; 
@@ -58,14 +59,18 @@ public class SpotifyApi {
 
 		service = retrofit.create(SpotifyApiInterface.class);
 	}
+	
+	private String getBearer() {
+		return "Bearer " + token.getAccessToken();
+	}
 
 	public String getUsername() throws IOException {		
-		retrofit2.Response<Me> response = service.me("Bearer " + token.getAccessToken()).execute();
+		retrofit2.Response<Me> response = service.me(getBearer()).execute();
 		return response.body().getDisplayName();
 	}
 
 	public List<Item> getTopTracks() throws IOException {
-		retrofit2.Response<TopTracks> response = service.topTracks("Bearer " + token.getAccessToken(), "long_term", 1).execute();
+		retrofit2.Response<TopTracks> response = service.topTracks(getBearer(), "long_term", 1).execute();
 		return response.body().getItems();
 	}
 
@@ -73,9 +78,9 @@ public class SpotifyApi {
 	// token de acceso
 	public Token requestAccessToken(String authorizationCode) throws Exception {
 		
-		String clientId = BUNDLE.getString("spotify.client.id");
-		String clientSecret = BUNDLE.getString("spotify.client.secret");
-		String redirectUri = BUNDLE.getString("spotify.client.redirectUri");
+		String clientId = CONFIG.getString("spotify.client.id");
+		String clientSecret = CONFIG.getString("spotify.client.secret");
+		String redirectUri = CONFIG.getString("spotify.client.redirectUri");
 
 		RequestBody body = new FormBody.Builder()
 				.add("grant_type", "authorization_code")
@@ -85,7 +90,6 @@ public class SpotifyApi {
 
 		// Construye la cadena "client_id:client_secret" y la codifica en Base64
 		String credentials = clientId + ":" + clientSecret;
-		System.out.println("credentials: " + credentials);
 		String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes(StandardCharsets.UTF_8));
 		
 		Request request = new Request.Builder()
@@ -94,8 +98,6 @@ public class SpotifyApi {
 				.post(body)
 				.build();
 		
-		System.out.println(request);
-
 		Response response = client.newCall(request).execute();
 		
 		if (response.isSuccessful()) {

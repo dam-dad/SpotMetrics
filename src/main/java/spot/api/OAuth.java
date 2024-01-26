@@ -8,12 +8,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 public class OAuth {
 	
+	private ResourceBundle CONFIG = ResourceBundle.getBundle("config");
 	private OAuthCallback authCallback;
 	private HttpServer server;
 	
@@ -29,8 +31,8 @@ public class OAuth {
 	}
 
     private URI getAuthorizationEndpoint() throws URISyntaxException {
-        String clientId = "33e34aef0ac34bb2be3ca751252b16ff";
-        String redirectUri = "http://localhost:8888/callback";
+        String clientId = CONFIG.getString("spotify.client.id");
+        String redirectUri = CONFIG.getString("spotify.client.redirectUri");
         String responseType = "code";
         String scope = "user-top-read";
         String spotifyAuthorizationUrl = "https://accounts.spotify.com/authorize" +
