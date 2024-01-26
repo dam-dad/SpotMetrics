@@ -6,6 +6,9 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -59,7 +62,7 @@ public class OAuth {
         return result;
     }
 
-    private void handleRequest(HttpExchange exchange) throws IOException {
+    private void handleRequest(HttpExchange exchange) {
 
         System.out.println("recibida petición");
 
@@ -71,14 +74,14 @@ public class OAuth {
         System.out.println("enviando respuesta ...");
 
         // Envía una respuesta al navegador del usuario
-        String response = "<html><body>Autorizaci&oacute;n exitosa. Puedes cerrar esta ventana.</body></html>";
-        exchange.sendResponseHeaders(200, 0);
         try (OutputStream os = exchange.getResponseBody()) {
+            String response = Files.readString(Paths.get(getClass().getResource("/response.html").toURI()), StandardCharsets.UTF_8);
+            exchange.sendResponseHeaders(200, 0);
             os.write(response.getBytes());
             os.flush();
             os.close();
             System.out.println("respuesta enviada");
-        } catch (IOException e) {
+        } catch (Exception e) {
         	e.printStackTrace();
         }
 
