@@ -1,69 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-<<<<<<< Updated upstream
-    <groupId>SM.ValidateToken</groupId>
-    <artifactId>SpotifyPruebaAPI</artifactId>
-    <version>1.0-SNAPSHOT</version>
-=======
 	<groupId>SM.ValidateToken</groupId>
 	<artifactId>SpotMetrics</artifactId>
 	<version>1.0-SNAPSHOT</version>
->>>>>>> Stashed changes
 
-    <properties>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<properties>
+		<maven.compiler.source>20</maven.compiler.source>
+		<maven.compiler.target>20</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javafx.version>22-ea+11</javafx.version>
+		<retrofit.version>2.9.0</retrofit.version>
+	</properties>
 
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/se.michaelthelin.spotify/spotify-web-api-java -->
-        <dependency>
-            <groupId>se.michaelthelin.spotify</groupId>
-            <artifactId>spotify-web-api-java</artifactId>
-            <version>8.3.4</version>
-        </dependency>
-        
-        		<dependency>
+	<dependencies>
+		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>22-ea+11</version>
+			<version>${javafx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>22-ea+11</version>
+			<version>${javafx.version}</version>
 		</dependency>
-        
-        
-    </dependencies>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>retrofit</artifactId>
+			<version>${retrofit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-gson</artifactId>
+			<version>${retrofit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>3.14.9</version>
+		</dependency>
+	</dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jsonschema2pojo</groupId>
-                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <sourceDirectory>${basedir}/schema</sourceDirectory>
-                    <targetPackage>spot.model.toptracks</targetPackage>
-                    <outputDirectory>${project.build.directory}/main/java</outputDirectory>
-                    <sourceType>json</sourceType>
-                    <annotationStyle>gson</annotationStyle>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<sourceDirectory>${basedir}/schema</sourceDirectory>
+					<targetPackage>spot.api.model</targetPackage>
+					<outputDirectory>${project.build.directory}/main/java</outputDirectory>
+					<sourceType>json</sourceType>
+					<annotationStyle>gson</annotationStyle>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
