@@ -73,6 +73,10 @@ public class SpotifyApi {
 		retrofit2.Response<TopTracks> response = service.topTracks(getBearer(), "long_term", 1).execute();
 		return response.body().getItems();
 	}
+	
+	public Token getToken() {
+		return token;
+	}
 
 	// Implementación del método para intercambiar el código de autorización por el
 	// token de acceso
