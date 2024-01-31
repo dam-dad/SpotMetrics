@@ -7,16 +7,16 @@ import javafx.stage.Stage;
 
 public class AppMain extends Application {
 
-	private MainController mainController;
+	private LoginController loginController;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		mainController = new MainController();
+		loginController = new LoginController();
 
 		primaryStage.setTitle("SpotMetrics");
 
 		// Crear una escena con un Pane como nodo raíz
-		Pane rootPane = mainController.getView();
+		Pane rootPane = loginController.getView();
 		Scene scene = new Scene(rootPane);
 
 		// Establecer tamaño fijo para el nodo raíz (en este caso, el Pane)
