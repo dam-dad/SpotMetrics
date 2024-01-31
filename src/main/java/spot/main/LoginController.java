@@ -26,7 +26,9 @@ public class LoginController implements Initializable {
 	@FXML
 	private BorderPane view;
 
-	private TopTracksController topTracksController = new TopTracksController();
+	private Token accessToken;
+
+	private TopTracksController topTracksController;
 
 	public LoginController() {
 		try {
@@ -45,29 +47,24 @@ public class LoginController implements Initializable {
 
 	@FXML
 	void onLogin(ActionEvent event) throws Exception {
-
-		System.out.print("Metodo Login");
-
 		OAuth oauth = new OAuth();
 		oauth.auth(code -> {
 			try {
 				System.out.println("code: " + code);
 				SpotifyApi spot = new SpotifyApi();
-				Token token = spot.requestAccessToken(code);
-				System.out.println("token: " + token);
+				accessToken = spot.requestAccessToken(code);
+				System.out.println("token: " + accessToken);
 				System.out.println("usuario: " + spot.getUsername());
 				System.out.println("canciones: " + spot.getTopTracks().size());
 
-				spot.getTopTracks().forEach(track -> {
-					System.out.println("Track: " + track);
-				});
+				// Crear una instancia de TopTracksController pasando el token
+				TopTracksController topTracksController = new TopTracksController(accessToken);
 
 				// Cargar la vista TopTracks
 				BorderPane topTracksView = topTracksController.getView();
 
 				// Cargar la vista TopTracks en la escena
 				Platform.runLater(() -> {
-					// Coger la escena actual del Stage de la vista Login y cargar la vista TopTracks
 					Stage stage = (Stage) view.getScene().getWindow();
 					Scene topTracksScene = new Scene(topTracksView);
 					stage.setScene(topTracksScene);
@@ -77,7 +74,6 @@ public class LoginController implements Initializable {
 				e.printStackTrace();
 			}
 		});
-
 	}
 
 	public BorderPane getView() {
