@@ -81,6 +81,10 @@ public class SpotifyApi {
 
 	public String getUsername() throws IOException {
 		retrofit2.Response<Me> response = service.me(getBearer()).execute();
+		if (!response.isSuccessful()) {
+			throw new IOException(response.raw().toString());			
+		}
+		System.out.println(response.raw());
 		return response.body().getDisplayName();
 	}
 
