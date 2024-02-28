@@ -61,6 +61,11 @@
 				<groupId>org.jsonschema2pojo</groupId>
 				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
 				<version>1.2.1</version>
+				<configuration>
+					<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+					<sourceType>json</sourceType>
+					<annotationStyle>gson</annotationStyle>
+				</configuration>
 				<executions>
 					<execution>
 						<id>generate-topTracks</id>
@@ -71,9 +76,6 @@
 						<configuration>
 							<sourceDirectory>${basedir}/schema/topTracks</sourceDirectory>
 							<targetPackage>spot.api.model.toptracks</targetPackage>
-							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-							<sourceType>json</sourceType>
-							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
 					<execution>
@@ -85,9 +87,6 @@
 						<configuration>
 							<sourceDirectory>${basedir}/schema/topArtists</sourceDirectory>
 							<targetPackage>spot.api.model.topartists</targetPackage>
-							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-							<sourceType>json</sourceType>
-							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
 					<execution>
@@ -99,9 +98,6 @@
 						<configuration>
 							<sourceDirectory>${basedir}/schema/me</sourceDirectory>
 							<targetPackage>spot.api.model.me</targetPackage>
-							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-							<sourceType>json</sourceType>
-							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
 					<execution>
@@ -113,9 +109,6 @@
 						<configuration>
 							<sourceDirectory>${basedir}/schema/error</sourceDirectory>
 							<targetPackage>spot.api.model.error</targetPackage>
-							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
-							<sourceType>json</sourceType>
-							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
 				</executions>
