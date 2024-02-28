@@ -1,29 +1,24 @@
 package spot.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import okhttp3.*;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import spot.api.model.Token;
+import spot.api.model.me.Me;
+import spot.api.model.topartists.TopArtists;
+import spot.api.model.toptracks.Item;
+import spot.api.model.toptracks.TopTracks;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import okhttp3.ConnectionPool;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import spot.api.model.Item;
-import spot.api.model.Me;
-import spot.api.model.Token;
-import spot.api.model.TopTracks;
 
 public class SpotifyApi {
 
@@ -94,6 +89,11 @@ public class SpotifyApi {
 		return response.body().getItems();
 	}
 
+	public List<spot.api.model.topartists.Item> getTopArtists() throws IOException {
+		retrofit2.Response<TopArtists> response = service.topArtists(getBearer(), "long_term", 5).execute();
+		return response.body().getItems();
+	}
+
 	public Token getToken() {
 		return token;
 	}
@@ -127,7 +127,7 @@ public class SpotifyApi {
 		if (response.isSuccessful()) {
 			this.token = gson.fromJson(response.body().string(), Token.class);
 		} else {
-			spot.api.model.Error error = gson.fromJson(response.body().string(), spot.api.model.Error.class);
+			spot.api.model.error.Error error = gson.fromJson(response.body().string(), spot.api.model.error.Error.class);
 			throw new Exception(error.getErrorDescription());
 		}
 

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/4q3ewBCX7sLwd24euuV69X"
+      },
+      "genres": ["reggaeton", "trap latino", "urbano latino"],
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb9ad50e478a469448c6f369df",
+          "width": 640
+        }
+      ],
+      "name": "Bad Bunny",
+      "popularity": 95
+    }
+  ]
+}

@@ -47,29 +47,108 @@
 			<artifactId>logging-interceptor</artifactId>
 			<version>3.14.9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+
+			<!-- Plugin para generar el modelo de topTracks -->
 			<plugin>
 				<groupId>org.jsonschema2pojo</groupId>
 				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
 				<version>1.2.1</version>
-				<configuration>
-					<sourceDirectory>${basedir}/schema</sourceDirectory>
-					<targetPackage>spot.api.model</targetPackage>
-					<outputDirectory>${project.build.directory}/main/java</outputDirectory>
-					<sourceType>json</sourceType>
-					<annotationStyle>gson</annotationStyle>
-				</configuration>
 				<executions>
 					<execution>
+						<id>generate-topTracks</id>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/schema/topTracks</sourceDirectory>
+							<targetPackage>spot.api.model.toptracks</targetPackage>
+							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+							<sourceType>json</sourceType>
+							<annotationStyle>gson</annotationStyle>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Plugin para generar el modelo de topArtists -->
+			<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>generate-topArtists</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/schema/topArtists</sourceDirectory>
+							<targetPackage>spot.api.model.topartists</targetPackage>
+							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+							<sourceType>json</sourceType>
+							<annotationStyle>gson</annotationStyle>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Plugin para generar el modelo de me -->
+			<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>generate-me</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/schema/me</sourceDirectory>
+							<targetPackage>spot.api.model.me</targetPackage>
+							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+							<sourceType>json</sourceType>
+							<annotationStyle>gson</annotationStyle>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Plugin para generar el modelo de error -->
+			<plugin>
+				<groupId>org.jsonschema2pojo</groupId>
+				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<id>generate-error</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/schema/error</sourceDirectory>
+							<targetPackage>spot.api.model.error</targetPackage>
+							<outputDirectory>${project.build.directory}/generated-sources/java</outputDirectory>
+							<sourceType>json</sourceType>
+							<annotationStyle>gson</annotationStyle>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

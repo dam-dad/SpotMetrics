@@ -1,5 +1,6 @@
-package spot.main;
+package spot.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,8 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import spot.api.SpotifyApi;
-import spot.api.model.Item;
+import spot.api.model.toptracks.Item;
 import spot.api.model.Token;
+import spot.main.AppMain;
 
 import java.io.IOException;
 import java.net.URL;
@@ -134,6 +136,11 @@ public class TopTracksController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void onVolver(ActionEvent event) {
+        AppMain.getRootController().showMain();
     }
 
 }
