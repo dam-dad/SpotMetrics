@@ -57,7 +57,6 @@
 	<build>
 		<plugins>
 
-			<!-- Plugin para generar el modelo de topTracks -->
 			<plugin>
 				<groupId>org.jsonschema2pojo</groupId>
 				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
@@ -77,15 +76,6 @@
 							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Plugin para generar el modelo de topArtists -->
-			<plugin>
-				<groupId>org.jsonschema2pojo</groupId>
-				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
 					<execution>
 						<id>generate-topArtists</id>
 						<phase>generate-sources</phase>
@@ -100,15 +90,6 @@
 							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Plugin para generar el modelo de me -->
-			<plugin>
-				<groupId>org.jsonschema2pojo</groupId>
-				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
 					<execution>
 						<id>generate-me</id>
 						<phase>generate-sources</phase>
@@ -123,15 +104,6 @@
 							<annotationStyle>gson</annotationStyle>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Plugin para generar el modelo de error -->
-			<plugin>
-				<groupId>org.jsonschema2pojo</groupId>
-				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
 					<execution>
 						<id>generate-error</id>
 						<phase>generate-sources</phase>
