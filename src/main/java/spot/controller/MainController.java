@@ -1,10 +1,11 @@
 package spot.controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import spot.api.model.Token;
 import spot.main.AppMain;
@@ -15,13 +16,17 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    @FXML
+    private ImageView UserImage;
+
+    @FXML
+    private BorderPane view;
+
     private Token accessToken;
 
     TopTracksController topTracksController;
     TopArtistsController topArtistsController;
-
-    @FXML
-    private BorderPane view;
+    RecommendedTracksController recommendedTracksController;
 
     public MainController(Token accessToken) {
         this.accessToken = accessToken;
@@ -39,6 +44,10 @@ public class MainController implements Initializable {
 
         topTracksController = new TopTracksController(accessToken);
         topArtistsController = new TopArtistsController(accessToken);
+        recommendedTracksController = new RecommendedTracksController(accessToken);
+
+        // TODO: Cargar la imagen del usuario
+//        setImageViewFromUrl(UserImage, );
 
     }
 
@@ -59,6 +68,26 @@ public class MainController implements Initializable {
     void onTopTracks(ActionEvent event) {
         try {
             AppMain.getRootController().updateView(topTracksController.getView());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void onRecommended(ActionEvent event) {
+        try {
+            AppMain.getRootController().updateView(recommendedTracksController.getView());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
+        try {
+            // Cargar la imagen desde la URL
+            Image image = new Image(imageUrl);
+            // Establecer la imagen en el ImageView
+            imageView.setImage(image);
         } catch (Exception e) {
             e.printStackTrace();
         }

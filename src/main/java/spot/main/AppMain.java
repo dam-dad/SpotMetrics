@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import spot.controller.LoginController;
 import spot.controller.RootController;
 
 public class AppMain extends Application {
@@ -23,7 +22,7 @@ public class AppMain extends Application {
 		primaryStage.setScene(scene);
 
 		// Deshabilitar la capacidad de cambiar el tamaño de la ventana
-		//primaryStage.setResizable(false);
+//		primaryStage.setResizable(false);
 
 		primaryStage.show();
 	}

@@ -13,7 +13,10 @@ import spot.api.model.toptracks.Item;
 import spot.api.model.Token;
 import spot.main.AppMain;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -96,26 +99,66 @@ public class TopTracksController implements Initializable {
             namesong1.setText(canciones.get(0).getName());
             artistname1.setText(canciones.get(0).getAlbum().getArtists().get(0).getName());
             setImageViewFromUrl(img1, canciones.get(0).getAlbum().getImages().get(0).getUrl());
+            img1.setOnMouseClicked(event -> {
+                try {
+                    // Abrir el enlace en el navegador web predeterminado
+                    Desktop.getDesktop().browse(new URI(canciones.get(0).getExternalUrls().getSpotify()));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Top 2
             namesong2.setText(canciones.get(1).getName());
             artistname2.setText(canciones.get(1).getAlbum().getArtists().get(0).getName());
             setImageViewFromUrl(img2, canciones.get(1).getAlbum().getImages().get(0).getUrl());
+            img2.setOnMouseClicked(event -> {
+                try {
+                    // Abrir el enlace en el navegador web predeterminado
+                    Desktop.getDesktop().browse(new URI(canciones.get(1).getExternalUrls().getSpotify()));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Top 3
             namesong3.setText(canciones.get(2).getName());
             artistname3.setText(canciones.get(2).getAlbum().getArtists().get(0).getName());
             setImageViewFromUrl(img3, canciones.get(2).getAlbum().getImages().get(0).getUrl());
+            img3.setOnMouseClicked(event -> {
+                try {
+                    // Abrir el enlace en el navegador web predeterminado
+                    Desktop.getDesktop().browse(new URI(canciones.get(2).getExternalUrls().getSpotify()));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Top 4
             namesong4.setText(canciones.get(3).getName());
             artistname4.setText(canciones.get(3).getAlbum().getArtists().get(0).getName());
             setImageViewFromUrl(img4, canciones.get(3).getAlbum().getImages().get(0).getUrl());
+            img4.setOnMouseClicked(event -> {
+                try {
+                    // Abrir el enlace en el navegador web predeterminado
+                    Desktop.getDesktop().browse(new URI(canciones.get(3).getExternalUrls().getSpotify()));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            });
 
             // Top 5
             namesong5.setText(canciones.get(4).getName());
             artistname5.setText(canciones.get(4).getAlbum().getArtists().get(0).getName());
             setImageViewFromUrl(img5, canciones.get(4).getAlbum().getImages().get(0).getUrl());
+            img5.setOnMouseClicked(event -> {
+                try {
+                    // Abrir el enlace en el navegador web predeterminado
+                    Desktop.getDesktop().browse(new URI(canciones.get(4).getExternalUrls().getSpotify()));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            });
 
         } catch (IOException e) {
             e.printStackTrace();
