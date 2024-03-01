@@ -24,9 +24,12 @@ public class MainController implements Initializable {
 
     private Token accessToken;
 
+//    private spot.api.model.me.Image claseImage;
+
     TopTracksController topTracksController;
     TopArtistsController topArtistsController;
     RecommendedTracksController recommendedTracksController;
+
 
     public MainController(Token accessToken) {
         this.accessToken = accessToken;
@@ -46,8 +49,14 @@ public class MainController implements Initializable {
         topArtistsController = new TopArtistsController(accessToken);
         recommendedTracksController = new RecommendedTracksController(accessToken);
 
-        // TODO: Cargar la imagen del usuario
-//        setImageViewFromUrl(UserImage, );
+//        claseImage = new spot.api.model.me.Image();
+
+//        // TODO: Cargar la imagen del usuario
+//
+//        // Aquí debes obtener la URL de la imagen del usuario
+//        String userImageUrl = claseImage.getUrl();
+//
+//        setImageViewFromUrl(UserImage, userImageUrl);
 
     }
 

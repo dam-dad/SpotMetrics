@@ -15,6 +15,7 @@ import org.controlsfx.control.Rating;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.api.model.topartists.Item;
+import spot.main.AppMain;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,19 +27,19 @@ import java.util.ResourceBundle;
 public class TopArtistsController implements Initializable {
 
     @FXML
-    private Label generoText1;
+    private Label artistname1;
 
     @FXML
-    private Label generoText2;
+    private Label artistname2;
 
     @FXML
-    private Label generoText3;
+    private Label artistname3;
 
     @FXML
-    private Label generoText4;
+    private Label artistname4;
 
     @FXML
-    private Label generoText5;
+    private Label artistname5;
 
     @FXML
     private ImageView img1;
@@ -71,19 +72,19 @@ public class TopArtistsController implements Initializable {
     private Label namesong5;
 
     @FXML
-    private Rating progressBar1;
+    private Rating rating1;
 
     @FXML
-    private Rating progressBar2;
+    private Rating rating2;
 
     @FXML
-    private Rating progressBar3;
+    private Rating rating3;
 
     @FXML
-    private Rating progressBar4;
+    private Rating rating4;
 
     @FXML
-    private Rating progressBar5;
+    private Rating rating5;
 
     @FXML
     private BorderPane view;
@@ -114,11 +115,11 @@ public class TopArtistsController implements Initializable {
 
             // Top 1
             namesong1.setText(artistas.get(0).getName());
-            generoText1.setText(String.join(", ", artistas.get(0).getGenres()));
+            artistname1.setText(String.join(", ", artistas.get(0).getGenres()));
             setImageViewFromUrl(img1, artistas.get(0).getImages().get(0).getUrl());
-            progressBar1.setRating(artistas.get(0).getPopularity() / 20.0);
+            rating1.setRating(artistas.get(0).getPopularity() / 20.0);
 
-            progressBar1.setOnMouseClicked(event -> progressBar1.setRating(artistas.get(0).getPopularity() / 20.0));
+            rating1.setOnMouseClicked(event -> rating1.setRating(artistas.get(0).getPopularity() / 20.0));
 
             img1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -138,11 +139,11 @@ public class TopArtistsController implements Initializable {
 
             // Top 2
             namesong2.setText(artistas.get(1).getName());
-            generoText2.setText(String.join(", ", artistas.get(1).getGenres()));
+            artistname2.setText(String.join(", ", artistas.get(1).getGenres()));
             setImageViewFromUrl(img2, artistas.get(1).getImages().get(0).getUrl());
-            progressBar2.setRating(artistas.get(1).getPopularity() / 20.0);
+            rating2.setRating(artistas.get(1).getPopularity() / 20.0);
 
-            progressBar2.setOnMouseClicked(event -> progressBar2.setRating(artistas.get(1).getPopularity() / 20.0));
+            rating2.setOnMouseClicked(event -> rating2.setRating(artistas.get(1).getPopularity() / 20.0));
 
             img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -161,11 +162,11 @@ public class TopArtistsController implements Initializable {
 
             // Top 3
             namesong3.setText(artistas.get(2).getName());
-            generoText3.setText(String.join(", ", artistas.get(2).getGenres()));
+            artistname3.setText(String.join(", ", artistas.get(2).getGenres()));
             setImageViewFromUrl(img3, artistas.get(2).getImages().get(0).getUrl());
-            progressBar3.setRating(artistas.get(2).getPopularity() / 20.0);
+            rating3.setRating(artistas.get(2).getPopularity() / 20.0);
 
-            progressBar3.setOnMouseClicked(event -> progressBar3.setRating(artistas.get(2).getPopularity() / 20.0));
+            rating3.setOnMouseClicked(event -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
 
             img3.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -184,11 +185,11 @@ public class TopArtistsController implements Initializable {
 
             // Top 4
             namesong4.setText(artistas.get(3).getName());
-            generoText4.setText(String.join(", ", artistas.get(3).getGenres()));
+            artistname4.setText(String.join(", ", artistas.get(3).getGenres()));
             setImageViewFromUrl(img4, artistas.get(3).getImages().get(0).getUrl());
-            progressBar4.setRating(artistas.get(3).getPopularity() / 20.0);
+            rating4.setRating(artistas.get(3).getPopularity() / 20.0);
 
-            progressBar4.setOnMouseClicked(event -> progressBar4.setRating(artistas.get(3).getPopularity() / 20.0));
+            rating4.setOnMouseClicked(event -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
 
             img4.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -207,11 +208,11 @@ public class TopArtistsController implements Initializable {
 
             // Top 5
             namesong5.setText(artistas.get(4).getName());
-            generoText5.setText(String.join(", ", artistas.get(4).getGenres()));
+            artistname5.setText(String.join(", ", artistas.get(4).getGenres()));
             setImageViewFromUrl(img5, artistas.get(4).getImages().get(0).getUrl());
-            progressBar5.setRating(artistas.get(4).getPopularity() / 20.0);
+            rating5.setRating(artistas.get(4).getPopularity() / 20.0);
 
-            progressBar5.setOnMouseClicked(event -> progressBar5.setRating(artistas.get(4).getPopularity() / 20.0));
+            rating5.setOnMouseClicked(event -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
 
             img5.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -247,6 +248,11 @@ public class TopArtistsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void onVolver(ActionEvent event) {
+        AppMain.getRootController().showMain();
     }
 
 }
