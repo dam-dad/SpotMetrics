@@ -5,10 +5,12 @@ import com.google.gson.GsonBuilder;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
+import org.apache.commons.lang3.StringUtils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import spot.api.model.Token;
 import spot.api.model.me.Me;
+import spot.api.model.recommendations.RecommendedTracks;
 import spot.api.model.topartists.TopArtists;
 import spot.api.model.toptracks.Item;
 import spot.api.model.toptracks.TopTracks;
@@ -88,6 +90,24 @@ public class SpotifyApi {
 		return response.body().getDisplayName();
 	}
 
+	public String getUserImage() throws IOException {
+		retrofit2.Response<Me> response = service.me(getBearer()).execute();
+		if (!response.isSuccessful()) {
+			throw new IOException(response.raw().toString());
+		}
+		System.out.println(response.raw());
+		return response.body().getImages().get(0).getUrl();
+	}
+
+	public String getUserUrl() throws IOException {
+		retrofit2.Response<Me> response = service.me(getBearer()).execute();
+		if (!response.isSuccessful()) {
+			throw new IOException(response.raw().toString());
+		}
+		System.out.println(response.raw());
+		return response.body().getExternalUrls().getSpotify();
+	}
+
 	public List<Item> getTopTracks() throws IOException {
 		retrofit2.Response<TopTracks> response = service.topTracks(getBearer(), "long_term", 5).execute();
 		return response.body().getItems();
@@ -96,6 +116,12 @@ public class SpotifyApi {
 	public List<spot.api.model.topartists.Item> getTopArtists() throws IOException {
 		retrofit2.Response<TopArtists> response = service.topArtists(getBearer(), "long_term", 5).execute();
 		return response.body().getItems();
+	}
+
+	public List<spot.api.model.recommendations.Track> getRecommendations(List<String> seed) throws IOException {
+		String seedTracks = StringUtils.join(seed, ',');
+		retrofit2.Response<RecommendedTracks> response = service.recommendations(getBearer(), 5, seedTracks).execute();
+		return response.body().getTracks();
 	}
 
 	public Token getToken() {

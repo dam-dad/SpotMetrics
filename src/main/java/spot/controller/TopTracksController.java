@@ -92,73 +92,54 @@ public class TopTracksController implements Initializable {
 
         api.setToken(accessToken);
 
+
         try {
             canciones = api.getTopTracks();
+            String[] idsCanciones = new String[canciones.size()];
 
-            // Top 1
-            namesong1.setText(canciones.get(0).getName());
-            artistname1.setText(canciones.get(0).getAlbum().getArtists().get(0).getName());
-            setImageViewFromUrl(img1, canciones.get(0).getAlbum().getImages().get(0).getUrl());
-            img1.setOnMouseClicked(event -> {
-                try {
-                    // Abrir el enlace en el navegador web predeterminado
-                    Desktop.getDesktop().browse(new URI(canciones.get(0).getExternalUrls().getSpotify()));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            });
+            for (int i = 0; i < canciones.size(); i++) {
 
-            // Top 2
-            namesong2.setText(canciones.get(1).getName());
-            artistname2.setText(canciones.get(1).getAlbum().getArtists().get(0).getName());
-            setImageViewFromUrl(img2, canciones.get(1).getAlbum().getImages().get(0).getUrl());
-            img2.setOnMouseClicked(event -> {
-                try {
-                    // Abrir el enlace en el navegador web predeterminado
-                    Desktop.getDesktop().browse(new URI(canciones.get(1).getExternalUrls().getSpotify()));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            });
+                idsCanciones[i] = canciones.get(i).getId();
 
-            // Top 3
-            namesong3.setText(canciones.get(2).getName());
-            artistname3.setText(canciones.get(2).getAlbum().getArtists().get(0).getName());
-            setImageViewFromUrl(img3, canciones.get(2).getAlbum().getImages().get(0).getUrl());
-            img3.setOnMouseClicked(event -> {
-                try {
-                    // Abrir el enlace en el navegador web predeterminado
-                    Desktop.getDesktop().browse(new URI(canciones.get(2).getExternalUrls().getSpotify()));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            });
 
-            // Top 4
-            namesong4.setText(canciones.get(3).getName());
-            artistname4.setText(canciones.get(3).getAlbum().getArtists().get(0).getName());
-            setImageViewFromUrl(img4, canciones.get(3).getAlbum().getImages().get(0).getUrl());
-            img4.setOnMouseClicked(event -> {
-                try {
-                    // Abrir el enlace en el navegador web predeterminado
-                    Desktop.getDesktop().browse(new URI(canciones.get(3).getExternalUrls().getSpotify()));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            });
+            }
 
-            // Top 5
-            namesong5.setText(canciones.get(4).getName());
-            artistname5.setText(canciones.get(4).getAlbum().getArtists().get(0).getName());
-            setImageViewFromUrl(img5, canciones.get(4).getAlbum().getImages().get(0).getUrl());
-            img5.setOnMouseClicked(event -> {
-                try {
-                    // Abrir el enlace en el navegador web predeterminado
-                    Desktop.getDesktop().browse(new URI(canciones.get(4).getExternalUrls().getSpotify()));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
+            for (int i = 0; i < canciones.size(); i++) {
+
+                System.out.println(idsCanciones[i]);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+            try {
+            canciones = api.getTopTracks();
+
+            Label[] namesongs = {namesong1, namesong2, namesong3, namesong4, namesong5};
+            Label[] artistnames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+            ImageView[] imageViews = {img1, img2, img3, img4, img5};
+
+            for (int i = 0; i < canciones.size(); i++) {
+                if (i < namesongs.length) {
+                    canciones.get(i).getId();
+                    namesongs[i].setText(canciones.get(i).getName());
+                    artistnames[i].setText(canciones.get(i).getAlbum().getArtists().get(0).getName());
+                    setImageViewFromUrl(imageViews[i], canciones.get(i).getAlbum().getImages().get(0).getUrl());
+                    int finalI = i; // Variable final para usar en la expresión lambda
+                    imageViews[i].setOnMouseClicked(event -> {
+                        try {
+                            // Abrir el enlace en el navegador web predeterminado
+                            Desktop.getDesktop().browse(new URI(canciones.get(finalI).getExternalUrls().getSpotify()));
+                        } catch (IOException | URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
-            });
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -8,11 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import spot.api.SpotifyApi;
 import spot.api.model.Token;
+import spot.api.model.recommendations.Track;
+import spot.api.model.toptracks.Item;
 import spot.main.AppMain;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RecommendedTracksController implements Initializable {
@@ -65,6 +70,8 @@ public class RecommendedTracksController implements Initializable {
     @FXML
     private BorderPane view;
 
+    private List<Item> canciones;
+
     private Token accessToken;
 
     public RecommendedTracksController(Token accessToken) {
@@ -80,41 +87,25 @@ public class RecommendedTracksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        SpotifyApi api = new SpotifyApi();
-//
-//        api.setToken(accessToken);
-//
-//        try {
-//            canciones = api.getTopTracks();
-//
-//            // Top 1
-//            namesong1.setText(canciones.get(0).getName());
-//            artistname1.setText(canciones.get(0).getAlbum().getArtists().get(0).getName());
-//            setImageViewFromUrl(img1, canciones.get(0).getAlbum().getImages().get(0).getUrl());
-//
-//            // Top 2
-//            namesong2.setText(canciones.get(1).getName());
-//            artistname2.setText(canciones.get(1).getAlbum().getArtists().get(0).getName());
-//            setImageViewFromUrl(img2, canciones.get(1).getAlbum().getImages().get(0).getUrl());
-//
-//            // Top 3
-//            namesong3.setText(canciones.get(2).getName());
-//            artistname3.setText(canciones.get(2).getAlbum().getArtists().get(0).getName());
-//            setImageViewFromUrl(img3, canciones.get(2).getAlbum().getImages().get(0).getUrl());
-//
-//            // Top 4
-//            namesong4.setText(canciones.get(3).getName());
-//            artistname4.setText(canciones.get(3).getAlbum().getArtists().get(0).getName());
-//            setImageViewFromUrl(img4, canciones.get(3).getAlbum().getImages().get(0).getUrl());
-//
-//            // Top 5
-//            namesong5.setText(canciones.get(4).getName());
-//            artistname5.setText(canciones.get(4).getAlbum().getArtists().get(0).getName());
-//            setImageViewFromUrl(img5, canciones.get(4).getAlbum().getImages().get(0).getUrl());
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        SpotifyApi api = new SpotifyApi();
+
+       api.setToken(accessToken);
+
+
+        try {
+            canciones = api.getTopTracks();
+            List<String> idsCanciones = new ArrayList<>();
+            for (int i = 0; i < canciones.size(); i++) {
+                idsCanciones.add(canciones.get(i).getId());
+            }
+
+            List<Track> Recomendaciones = api.getRecommendations(idsCanciones);
+
+            System.out.println(Recomendaciones.get(0).getName());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+       }
     }
 
     public BorderPane getView() {

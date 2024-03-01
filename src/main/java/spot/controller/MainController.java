@@ -7,10 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.main.AppMain;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,12 +28,9 @@ public class MainController implements Initializable {
 
     private Token accessToken;
 
-//    private spot.api.model.me.Image claseImage;
-
     TopTracksController topTracksController;
     TopArtistsController topArtistsController;
     RecommendedTracksController recommendedTracksController;
-
 
     public MainController(Token accessToken) {
         this.accessToken = accessToken;
@@ -49,14 +50,29 @@ public class MainController implements Initializable {
         topArtistsController = new TopArtistsController(accessToken);
         recommendedTracksController = new RecommendedTracksController(accessToken);
 
-//        claseImage = new spot.api.model.me.Image();
+        SpotifyApi spot = new SpotifyApi();
 
-//        // TODO: Cargar la imagen del usuario
-//
-//        // Aquí debes obtener la URL de la imagen del usuario
-//        String userImageUrl = claseImage.getUrl();
-//
-//        setImageViewFromUrl(UserImage, userImageUrl);
+        spot.setToken(accessToken);
+
+        try {
+
+            String userImageUrl = spot.getUserImage();
+
+            setImageViewFromUrl(UserImage, userImageUrl);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        UserImage.setOnMouseClicked(event -> {
+            try {
+                // Abrir el enlace en el navegador web predeterminado
+                Desktop.getDesktop().browse(new URI(spot.getUserUrl()));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+
 
     }
 
