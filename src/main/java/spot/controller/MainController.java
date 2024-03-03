@@ -48,7 +48,7 @@ public class MainController implements Initializable {
 
         topTracksController = new TopTracksController(accessToken);
         topArtistsController = new TopArtistsController(accessToken);
-     //   recommendedTracksController = new RecommendedTracksController(accessToken);
+        recommendedTracksController = new RecommendedTracksController(accessToken);
 
         SpotifyApi spot = new SpotifyApi();
 

@@ -115,12 +115,14 @@ public class SpotifyApi {
 
 	public List<spot.api.model.topartists.Item> getTopArtists() throws IOException {
 		retrofit2.Response<TopArtists> response = service.topArtists(getBearer(), "long_term", 5).execute();
+		System.out.println("Bearer de getTopArtits " + getBearer());
 		return response.body().getItems();
 	}
 
-	public List<spot.api.model.recommendations.Track> getRecommendations(List<String> seed) throws IOException {
-		String seedTracks = StringUtils.join(seed, ',');
-		retrofit2.Response<RecommendedTracks> response = service.recommendations(getBearer(), 5, seedTracks).execute();
+	public List<spot.api.model.recommendations.Track> getRecommendations(List<String> idsCanciones) throws IOException {
+		String seedTracks = StringUtils.join(idsCanciones, ',');	
+		retrofit2.Response<RecommendedTracks> response = service.recommendations(getBearer(), seedTracks, 5).execute();
+		
 		return response.body().getTracks();
 	}
 

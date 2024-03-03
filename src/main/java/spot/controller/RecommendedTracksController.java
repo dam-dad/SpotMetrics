@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,7 +15,10 @@ import spot.api.model.recommendations.Track;
 import spot.api.model.toptracks.Item;
 import spot.main.AppMain;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,9 +103,45 @@ public class RecommendedTracksController implements Initializable {
                 idsCanciones.add(canciones.get(i).getId());
             }
 
-            List<Track> Recomendaciones = api.getRecommendations(idsCanciones);
+            List<Track> recomendaciones = api.getRecommendations(idsCanciones);
 
-            System.out.println(Recomendaciones.get(0).getName());
+            
+            for (int i = 0; i < recomendaciones.size(); i++) {
+                if (i < 5) {
+                    Track track = recomendaciones.get(i);
+                    Label[] artistNames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+                    Label[] songNames = {namesong1, namesong2, namesong3, namesong4, namesong5};
+                    ImageView[] artistImages = {img1, img2, img3, img4, img5};
+
+                    songNames[i].setText(track.getName()); 
+                    artistNames[i].setText(String.join(", ", track.getAlbum().getArtists().get(0).getName()));
+                    setImageViewFromUrl(artistImages[i], track.getAlbum().getImages().get(0).getUrl());
+
+                    final int index = i;
+                    artistImages[i].setOnMouseClicked(event -> {
+                        try {
+                            // Abrir el enlace en el navegador web predeterminado
+                            try {
+								Desktop.getDesktop().browse(new URI(track.getExternalUrls().getSpotify()));
+							} catch (URISyntaxException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                        } catch (IOException  e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    // Cambiar el estado del cursor para que sea seleccionable
+                    artistImages[i].setOnMouseEntered(event -> artistImages[index].setCursor(Cursor.HAND));
+                    artistImages[i].setOnMouseExited(event -> artistImages[index].setCursor(Cursor.DEFAULT));
+                }
+            }
+            
+            
+            
+            
+            System.out.println("La recomendacion es : " + recomendaciones.get(0).getName());
 
         } catch (IOException e) {
             e.printStackTrace();

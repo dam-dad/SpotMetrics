@@ -21,6 +21,8 @@ public interface SpotifyApiInterface {
 	public Call<TopArtists> topArtists(@Header("Authorization") String bearer, @Query("time_range") String timeRange, @Query("limit") Integer limit);
 
 	@GET("recommendations")
-	public Call<RecommendedTracks> recommendations(@Header("Authorization") String bearer, @Query("limit") Integer limit, @Query("seed_track") String seedTrack);
+	public Call<RecommendedTracks> recommendations(@Header("Authorization") String bearer,  @Query("seed_tracks") String seedTrack, @Query("limit") Integer limit);
 
+	
+	
 }
