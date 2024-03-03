@@ -34,15 +34,15 @@ public class OAuth {
 	}
 
     private URI getAuthorizationEndpoint() throws URISyntaxException {
-        String clientId = CONFIG.getString("spotify.client.id");
-        String redirectUri = CONFIG.getString("spotify.client.redirectUri");
-        String responseType = "code";
-        String scope = "user-top-read";
-        String spotifyAuthorizationUrl = "https://accounts.spotify.com/authorize" +
-                "?client_id=" + clientId +
-                "&response_type=" + responseType +
-                "&redirect_uri=" + redirectUri +
-                "&scope=" + scope;
+    	String clientId = CONFIG.getString("spotify.client.id");
+    	String redirectUri = CONFIG.getString("spotify.client.redirectUri");
+    	String responseType = "code";
+    	String scope = "user-top-read%20user-read-recently-played%20user-library-read%20playlist-read-private";
+    	String spotifyAuthorizationUrl = "https://accounts.spotify.com/authorize" +
+    	        "?client_id=" + clientId +
+    	        "&response_type=" + responseType +
+    	        "&redirect_uri=" + redirectUri +
+    	        "&scope=" + scope;
         return new URI(spotifyAuthorizationUrl);
     }
     

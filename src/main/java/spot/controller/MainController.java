@@ -48,30 +48,34 @@ public class MainController implements Initializable {
 
         topTracksController = new TopTracksController(accessToken);
         topArtistsController = new TopArtistsController(accessToken);
-        recommendedTracksController = new RecommendedTracksController(accessToken);
+     //   recommendedTracksController = new RecommendedTracksController(accessToken);
 
         SpotifyApi spot = new SpotifyApi();
 
         spot.setToken(accessToken);
 
         try {
-
             String userImageUrl = spot.getUserImage();
-
-            setImageViewFromUrl(UserImage, userImageUrl);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        UserImage.setOnMouseClicked(event -> {
-            try {
-                // Abrir el enlace en el navegador web predeterminado
-                Desktop.getDesktop().browse(new URI(spot.getUserUrl()));
-            } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+            if (userImageUrl != null && !userImageUrl.isEmpty()) {
+                setImageViewFromUrl(UserImage, userImageUrl);
+                
+                UserImage.setOnMouseClicked(event -> {
+                    try {
+                        // Abrir el enlace en el navegador web predeterminado
+                        Desktop.getDesktop().browse(new URI(spot.getUserUrl()));
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
-        });
+        } catch (IOException e) {
+            // Manejo de la excepción IOException
+            System.err.println("Error al cargar la imagen del usuario");
+            // Podrías mostrar un mensaje de error al usuario
+        } catch (Exception e) {
+            // Manejo de otras excepciones
+        	 System.err.println("Error al cargar la imagen del usuario");
+        }
 
 
     }

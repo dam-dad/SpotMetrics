@@ -20,6 +20,7 @@ import spot.main.AppMain;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -110,130 +111,46 @@ public class TopArtistsController implements Initializable {
 
         api.setToken(accessToken);
 
+        
         try {
             artistas = api.getTopArtists();
 
-            // Top 1
-            namesong1.setText(artistas.get(0).getName());
-            artistname1.setText(String.join(", ", artistas.get(0).getGenres()));
-            setImageViewFromUrl(img1, artistas.get(0).getImages().get(0).getUrl());
-            rating1.setRating(artistas.get(0).getPopularity() / 20.0);
+            Label[] artistNames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+            Label[] songNames = {namesong1, namesong2, namesong3, namesong4, namesong5};
+            Rating[] ratings = {rating1, rating2, rating3, rating4, rating5};
+            ImageView[] artistImages = {img1, img2, img3, img4, img5};
 
-            rating1.setOnMouseClicked(event -> rating1.setRating(artistas.get(0).getPopularity() / 20.0));
-
-            img1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(0).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            for (int i = 0; i < artistas.size(); i++) {
+                if (i < artistNames.length) {
+                    Item artist = artistas.get(i);
+                    songNames[i].setText(artist.getName()); 
+                    artistNames[i].setText(String.join(", ", artist.getGenres()));
+                    setImageViewFromUrl(artistImages[i], artist.getImages().get(0).getUrl());
+                    ratings[i].setRating(artist.getPopularity() / 20.0);
+                    int finalI = i; // Variable final para usar en la expresión lambda
+                    artistImages[i].setOnMouseClicked(event -> {
+                        try {
+                            // Abrir el enlace en el navegador web predeterminado
+                            Desktop.getDesktop().browse(new URI(artist.getExternalUrls().getSpotify()));
+                        } catch (IOException  e) {
+                            ((Throwable) e).printStackTrace();
+                        } catch (URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                    });
+                    // Cambiar el estado del cursor para que sea seleccionable
+                    artistImages[i].setOnMouseEntered(event -> artistImages[finalI].setCursor(Cursor.HAND));
+                    artistImages[i].setOnMouseExited(event -> artistImages[finalI].setCursor(Cursor.DEFAULT));
                 }
-            });
-
-            // Cambiar el estado del cursor para que sea seleccionable
-            img1.setOnMouseEntered(event -> img1.setCursor(Cursor.HAND));
-            img1.setOnMouseExited(event -> img1.setCursor(Cursor.DEFAULT));
-
-            // Top 2
-            namesong2.setText(artistas.get(1).getName());
-            artistname2.setText(String.join(", ", artistas.get(1).getGenres()));
-            setImageViewFromUrl(img2, artistas.get(1).getImages().get(0).getUrl());
-            rating2.setRating(artistas.get(1).getPopularity() / 20.0);
-
-            rating2.setOnMouseClicked(event -> rating2.setRating(artistas.get(1).getPopularity() / 20.0));
-
-            img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(1).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img2.setOnMouseEntered(event -> img2.setCursor(Cursor.HAND));
-            img2.setOnMouseExited(event -> img2.setCursor(Cursor.DEFAULT));
-
-            // Top 3
-            namesong3.setText(artistas.get(2).getName());
-            artistname3.setText(String.join(", ", artistas.get(2).getGenres()));
-            setImageViewFromUrl(img3, artistas.get(2).getImages().get(0).getUrl());
-            rating3.setRating(artistas.get(2).getPopularity() / 20.0);
-
-            rating3.setOnMouseClicked(event -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
-
-            img3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(2).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img3.setOnMouseEntered(event -> img3.setCursor(Cursor.HAND));
-            img3.setOnMouseExited(event -> img3.setCursor(Cursor.DEFAULT));
-
-            // Top 4
-            namesong4.setText(artistas.get(3).getName());
-            artistname4.setText(String.join(", ", artistas.get(3).getGenres()));
-            setImageViewFromUrl(img4, artistas.get(3).getImages().get(0).getUrl());
-            rating4.setRating(artistas.get(3).getPopularity() / 20.0);
-
-            rating4.setOnMouseClicked(event -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
-
-            img4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(3).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img4.setOnMouseEntered(event -> img4.setCursor(Cursor.HAND));
-            img4.setOnMouseExited(event -> img4.setCursor(Cursor.DEFAULT));
-
-            // Top 5
-            namesong5.setText(artistas.get(4).getName());
-            artistname5.setText(String.join(", ", artistas.get(4).getGenres()));
-            setImageViewFromUrl(img5, artistas.get(4).getImages().get(0).getUrl());
-            rating5.setRating(artistas.get(4).getPopularity() / 20.0);
-
-            rating5.setOnMouseClicked(event -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
-
-            img5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(4).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img5.setOnMouseEntered(event -> img5.setCursor(Cursor.HAND));
-            img5.setOnMouseExited(event -> img5.setCursor(Cursor.DEFAULT));
-
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
+}
+        
+        
+ 
 
     public BorderPane getView() {
         return view;
