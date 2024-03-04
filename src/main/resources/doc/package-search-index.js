@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"spot.api"},{"l":"spot.api.model"},{"l":"spot.controller"},{"l":"spot.main"}];updateSearchResults();

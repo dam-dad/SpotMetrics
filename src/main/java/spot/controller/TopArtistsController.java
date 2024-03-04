@@ -1,44 +1,55 @@
 package spot.controller;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.api.model.topartists.Item;
+import spot.main.AppMain;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de los artistas principales.
+ */
 public class TopArtistsController implements Initializable {
 
     @FXML
-    private Label generoText1;
+    private Label SpotMetrics;
 
     @FXML
-    private Label generoText2;
+    private Label artistname1;
 
     @FXML
-    private Label generoText3;
+    private Label artistname2;
 
     @FXML
-    private Label generoText4;
+    private Label artistname3;
 
     @FXML
-    private Label generoText5;
+    private Label artistname4;
+
+    @FXML
+    private Label artistname5;
 
     @FXML
     private ImageView img1;
@@ -71,19 +82,19 @@ public class TopArtistsController implements Initializable {
     private Label namesong5;
 
     @FXML
-    private Rating progressBar1;
+    private Rating rating1;
 
     @FXML
-    private Rating progressBar2;
+    private Rating rating2;
 
     @FXML
-    private Rating progressBar3;
+    private Rating rating3;
 
     @FXML
-    private Rating progressBar4;
+    private Rating rating4;
 
     @FXML
-    private Rating progressBar5;
+    private Rating rating5;
 
     @FXML
     private BorderPane view;
@@ -92,6 +103,11 @@ public class TopArtistsController implements Initializable {
 
     private Token accessToken;
 
+    /**
+     * Constructor del controlador de los artistas principales.
+     *
+     * @param accessToken El token de acceso a la API de Spotify.
+     */
     public TopArtistsController(Token accessToken) {
         this.accessToken = accessToken;
         try {
@@ -106,138 +122,97 @@ public class TopArtistsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpotifyApi api = new SpotifyApi();
-
         api.setToken(accessToken);
 
         try {
             artistas = api.getTopArtists();
 
-            // Top 1
-            namesong1.setText(artistas.get(0).getName());
-            generoText1.setText(String.join(", ", artistas.get(0).getGenres()));
-            setImageViewFromUrl(img1, artistas.get(0).getImages().get(0).getUrl());
-            progressBar1.setRating(artistas.get(0).getPopularity() / 20.0);
+            Label[] artistNames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+            Label[] songNames = {namesong1, namesong2, namesong3, namesong4, namesong5};
+            Rating[] ratings = {rating1, rating2, rating3, rating4, rating5};
+            ImageView[] artistImages = {img1, img2, img3, img4, img5};
 
-            progressBar1.setOnMouseClicked(event -> progressBar1.setRating(artistas.get(0).getPopularity() / 20.0));
-
-            img1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(0).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            for (int i = 0; i < artistas.size(); i++) {
+                if (i < artistNames.length) {
+                    Item artist = artistas.get(i);
+                    songNames[i].setText(artist.getName());
+                    artistNames[i].setText(String.join(", ", artist.getGenres()));
+                    setImageViewFromUrl(artistImages[i], artist.getImages().get(0).getUrl());
+                    ratings[i].setRating(artist.getPopularity() / 20.0);
+                    int finalI = i; // Variable final para usar en la expresión lambda
+                    artistImages[i].setOnMouseClicked(event -> {
+                        try {
+                            // Abrir el enlace en el navegador web predeterminado
+                            Desktop.getDesktop().browse(new URI(artist.getExternalUrls().getSpotify()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    // Cambiar el estado del cursor para que sea seleccionable
+                    artistImages[i].setOnMouseEntered(event -> artistImages[finalI].setCursor(Cursor.HAND));
+                    artistImages[i].setOnMouseExited(event -> artistImages[finalI].setCursor(Cursor.DEFAULT));
                 }
-            });
 
-            // Cambiar el estado del cursor para que sea seleccionable
-            img1.setOnMouseEntered(event -> img1.setCursor(Cursor.HAND));
-            img1.setOnMouseExited(event -> img1.setCursor(Cursor.DEFAULT));
+                rating1.setOnMouseClicked(mouseEvent -> rating1.setRating(artistas.get(0).getPopularity() / 20.0));
+                rating2.setOnMouseClicked(mouseEvent -> rating2.setRating(artistas.get(1).getPopularity() / 20.0));
+                rating3.setOnMouseClicked(mouseEvent -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
+                rating4.setOnMouseClicked(mouseEvent -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
+                rating5.setOnMouseClicked(mouseEvent -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
 
-            // Top 2
-            namesong2.setText(artistas.get(1).getName());
-            generoText2.setText(String.join(", ", artistas.get(1).getGenres()));
-            setImageViewFromUrl(img2, artistas.get(1).getImages().get(0).getUrl());
-            progressBar2.setRating(artistas.get(1).getPopularity() / 20.0);
+                // Aplicar el efecto de sombra a cada ImageView
+                DropShadow dropShadow = new DropShadow();
+                dropShadow.setRadius(10); // Ajusta el radio de la sombra según lo deseado
+                dropShadow.setColor(Color.WHITE); // Ajusta el color de la sombra según lo deseado
 
-            progressBar2.setOnMouseClicked(event -> progressBar2.setRating(artistas.get(1).getPopularity() / 20.0));
+                img1.setEffect(dropShadow);
+                img2.setEffect(dropShadow);
+                img3.setEffect(dropShadow);
+                img4.setEffect(dropShadow);
+                img5.setEffect(dropShadow);
 
-            img2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(1).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
+                addHoverEffect(img1);
+                addHoverEffect(img2);
+                addHoverEffect(img3);
+                addHoverEffect(img4);
+                addHoverEffect(img5);
 
-            img2.setOnMouseEntered(event -> img2.setCursor(Cursor.HAND));
-            img2.setOnMouseExited(event -> img2.setCursor(Cursor.DEFAULT));
+                // Aplicar la fuente a todos los Label
+                SpotMetrics.getStyleClass().add("fuentetit");
 
-            // Top 3
-            namesong3.setText(artistas.get(2).getName());
-            generoText3.setText(String.join(", ", artistas.get(2).getGenres()));
-            setImageViewFromUrl(img3, artistas.get(2).getImages().get(0).getUrl());
-            progressBar3.setRating(artistas.get(2).getPopularity() / 20.0);
+                artistname1.getStyleClass().add("fuentesub");
+                artistname2.getStyleClass().add("fuentesub");
+                artistname3.getStyleClass().add("fuentesub");
+                artistname4.getStyleClass().add("fuentesub");
+                artistname5.getStyleClass().add("fuentesub");
 
-            progressBar3.setOnMouseClicked(event -> progressBar3.setRating(artistas.get(2).getPopularity() / 20.0));
-
-            img3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(2).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img3.setOnMouseEntered(event -> img3.setCursor(Cursor.HAND));
-            img3.setOnMouseExited(event -> img3.setCursor(Cursor.DEFAULT));
-
-            // Top 4
-            namesong4.setText(artistas.get(3).getName());
-            generoText4.setText(String.join(", ", artistas.get(3).getGenres()));
-            setImageViewFromUrl(img4, artistas.get(3).getImages().get(0).getUrl());
-            progressBar4.setRating(artistas.get(3).getPopularity() / 20.0);
-
-            progressBar4.setOnMouseClicked(event -> progressBar4.setRating(artistas.get(3).getPopularity() / 20.0));
-
-            img4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(3).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img4.setOnMouseEntered(event -> img4.setCursor(Cursor.HAND));
-            img4.setOnMouseExited(event -> img4.setCursor(Cursor.DEFAULT));
-
-            // Top 5
-            namesong5.setText(artistas.get(4).getName());
-            generoText5.setText(String.join(", ", artistas.get(4).getGenres()));
-            setImageViewFromUrl(img5, artistas.get(4).getImages().get(0).getUrl());
-            progressBar5.setRating(artistas.get(4).getPopularity() / 20.0);
-
-            progressBar5.setOnMouseClicked(event -> progressBar5.setRating(artistas.get(4).getPopularity() / 20.0));
-
-            img5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        // IMPORT AWT DESKTOP
-                        Desktop.getDesktop().browse(new URI(artistas.get(4).getExternalUrls().getSpotify()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            img5.setOnMouseEntered(event -> img5.setCursor(Cursor.HAND));
-            img5.setOnMouseExited(event -> img5.setCursor(Cursor.DEFAULT));
-
+                namesong1.getStyleClass().add("fuente");
+                namesong2.getStyleClass().add("fuente");
+                namesong3.getStyleClass().add("fuente");
+                namesong4.getStyleClass().add("fuente");
+                namesong5.getStyleClass().add("fuente");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Obtiene la vista del controlador.
+     *
+     * @return La vista del controlador.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Establece la imagen del ImageView desde una URL.
+     *
+     * @param imageView El ImageView para el que se establecerá la imagen.
+     * @param imageUrl  La URL de la imagen.
+     */
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
         try {
             // Cargar la imagen desde la URL
@@ -247,6 +222,43 @@ public class TopArtistsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Maneja el evento de volver al controlador principal.
+     *
+     * @param event El evento de acción.
+     */
+    @FXML
+    void onVolver(ActionEvent event) {
+        AppMain.getRootController().showMain();
+    }
+
+    /**
+     * Agrega el efecto de desplazamiento en el cambio de tamaño de las imágenes.
+     *
+     * @param imageView El ImageView al que se aplicará el efecto.
+     */
+    private void addHoverEffect(ImageView imageView) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), imageView);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), imageView);
+        translateTransition.setToY(-10);
+
+        imageView.setOnMouseEntered(event -> {
+            scaleTransition.playFromStart();
+            translateTransition.playFromStart();
+        });
+
+        imageView.setOnMouseExited(event -> {
+            scaleTransition.stop();
+            translateTransition.stop();
+            imageView.setScaleX(1.0);
+            imageView.setScaleY(1.0);
+            imageView.setTranslateY(0);
+        });
     }
 
 }

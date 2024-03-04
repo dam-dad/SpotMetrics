@@ -12,20 +12,20 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Token {
 
-    @SerializedName("access_token")
+	@SerializedName("access_token")
 	private String accessToken;
-    
-    @SerializedName("token_type")
+
+	@SerializedName("token_type")
 	private String tokenType;
 
-    @SerializedName("scope")
-    private String scope;
+	@SerializedName("scope")
+	private String scope;
 
-    @SerializedName("expires_in")
-    private Integer expiresIn;
+	@SerializedName("expires_in")
+	private Integer expiresIn;
 
-    @SerializedName("refresh_token")
-    private String refreshToken;
+	@SerializedName("refresh_token")
+	private String refreshToken;
 
 	public String getAccessToken() {
 		return accessToken;
@@ -72,7 +72,5 @@ public class Token {
 		return "Token [accessToken=" + accessToken + ", tokenType=" + tokenType + ", scope=" + scope + ", expiresIn="
 				+ expiresIn + ", refreshToken=" + refreshToken + "]";
 	}
-	
-	
 
 }

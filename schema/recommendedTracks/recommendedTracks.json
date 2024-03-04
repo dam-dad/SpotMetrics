@@ -1,0 +1,34 @@
+{
+  "tracks": [
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/4zxvC7CRGvggq9EWXOpwAo"
+            },
+            "name": "Kiesza"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/1tAbo8d7jkigBwC0ILVGvC"
+        },
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273af4c5f7f626f0a066b1304f3",
+            "width": 640
+          }
+        ],
+        "name": "Crave"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/6LWceFHm38kmnAmgavU1Ba"
+      },
+      "id": "6LWceFHm38kmnAmgavU1Ba",
+      "name": "Love Me With Your Lie",
+      "popularity": 33
+    }
+  ]
+}

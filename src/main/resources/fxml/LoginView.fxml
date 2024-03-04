@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,37 +14,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-  <left>
-   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-     <children>
-      <ImageView fx:id="loginImage" fitHeight="500.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-        <image>
-         <Image url="@../images/fondo.jpeg" />
-        </image>
-      </ImageView>
-     </children>
-   </VBox>
-  </left>
+<BorderPane fx:id="view" maxHeight="500.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <center>
-   <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" BorderPane.alignment="CENTER">
+   <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
     <columnConstraints>
-     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="1.7976931348623157E308" />
             <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
-     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+     <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" />
+     <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+     <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
     </rowConstraints>
      <children>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
         <children>
-         <Label text="SpotMetrics">
+         <Label styleClass="fuente" text="SpotMetrics" textFill="WHITE">
            <font>
             <Font name="Arial Black" size="24.0" />
            </font>
@@ -50,7 +41,7 @@
             <Insets left="20.0" top="30.0" />
            </padding>
          </Label>
-         <Label text="Log in here!">
+         <Label styleClass="fuentesub" text="Inicia sesión aquí" textFill="WHITE">
            <padding>
             <Insets left="20.0" />
            </padding>
@@ -60,51 +51,76 @@
          </Label>
         </children>
       </VBox>
-      <ImageView fitHeight="93.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+      <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
         <image>
-         <Image url="@../images/spotify-login-icon.png" />
+         <Image url="@../../../../../../../Downloads/Spotify-icon.png" />
         </image>
         <GridPane.margin>
-         <Insets top="30.0" />
+         <Insets />
         </GridPane.margin>
       </ImageView>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
         <children>
-         <Label text="Unlock your Spotify stats!">
+         <Label styleClass="fuente" text="¡Desbloquea tus estadísticas de Spotify!" textFill="WHITE" VBox.vgrow="NEVER">
            <font>
             <Font name="Arial" size="20.0" />
            </font>
-           <padding>
-            <Insets top="30.0" />
-           </padding>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
          </Label>
-         <Label text="Log in now to explore your musical journey.">
-           <font>
-            <Font name="Arial" size="20.0" />
-           </font>
-         </Label>
+                  <Label styleClass="fuente" text="Inicia sesión para ver tu historial musical" textFill="WHITE" VBox.vgrow="NEVER">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
         </children>
         <GridPane.margin>
          <Insets left="20.0" />
         </GridPane.margin>
       </VBox>
-      <Button fx:id="ButtonLogin" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogin" style="-fx-background-color: linear-gradient(to right, #b3e5f2, #d7bfff, #a979f6, #7d4dff, #c6f7b4);;" text="Log in here!" GridPane.columnSpan="2" GridPane.rowIndex="3">
+      <Button fx:id="ButtonLogin" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogin" style="-fx-background-color: linear-gradient(to right, #b3e5f2, #d7bfff, #a979f6, #7d4dff, #c6f7b4);;" styleClass="fuentesub" text="Iniciar sesión" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
         <GridPane.margin>
          <Insets left="120.0" top="10.0" />
         </GridPane.margin>
         <padding>
-         <Insets bottom="30.0" left="90.0" right="100.0" top="20.0" />
+         <Insets bottom="20.0" left="70.0" right="70.0" top="20.0" />
         </padding>
         <font>
          <Font size="15.0" />
         </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
       </Button>
       <Label opacity="0.25" text="Powered by: Diego Goya, Miguel Lombana, Flavia Di Giannatale, Daniel Ruiz." GridPane.columnSpan="2" GridPane.rowIndex="5">
         <GridPane.margin>
-         <Insets left="20.0" top="50.0" />
+         <Insets bottom="5.0" left="20.0" top="50.0" />
         </GridPane.margin>
       </Label>
+            <ImageView fx:id="LoadingImage" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+               <image>
+                  <Image url="@../images/loading.gif" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="25.0" top="50.0" />
+               </GridPane.margin>
+            </ImageView>
      </children>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
    </GridPane>
   </center>
+   <left>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <children>
+      <ImageView fx:id="loginImage" fitHeight="500.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+         <Image url="@../images/fondo.jpeg" />
+        </image>
+      </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
 </BorderPane>
