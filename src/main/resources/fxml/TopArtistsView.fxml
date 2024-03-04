@@ -112,7 +112,7 @@
                         </Label>
                      </graphic>
                   </Label>
-                  <Rating fx:id="rating1" />
+                  <Rating fx:id="rating1" partialRating="true" />
                   <Label fx:id="artistname1" text="Artist name" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
@@ -136,7 +136,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Rating fx:id="rating2" />
+                  <Rating fx:id="rating2" partialRating="true" />
                   <Label fx:id="artistname2" text="Name artist" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
@@ -159,7 +159,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Rating fx:id="rating3" />
+                  <Rating fx:id="rating3" partialRating="true" />
                   <Label fx:id="artistname3" text="Name artist" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
@@ -182,7 +182,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Rating fx:id="rating5" />
+                  <Rating fx:id="rating5" partialRating="true" />
                   <Label fx:id="artistname5" text="Name artist" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
@@ -206,7 +206,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Rating fx:id="rating4" />
+                  <Rating fx:id="rating4" partialRating="true" />
                   <Label fx:id="artistname4" contentDisplay="CENTER" text="Name artist" textFill="WHITE">
                      <font>
                         <Font size="15.0" />

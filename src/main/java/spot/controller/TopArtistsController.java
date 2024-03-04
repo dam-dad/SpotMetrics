@@ -143,6 +143,13 @@ public class TopArtistsController implements Initializable {
                     artistImages[i].setOnMouseEntered(event -> artistImages[finalI].setCursor(Cursor.HAND));
                     artistImages[i].setOnMouseExited(event -> artistImages[finalI].setCursor(Cursor.DEFAULT));
                 }
+                
+                rating1.setOnMouseClicked(mouseEvent -> rating1.setRating(artistas.get(0).getPopularity() / 20.0));
+                rating2.setOnMouseClicked(mouseEvent -> rating2.setRating(artistas.get(1).getPopularity() / 20.0));
+                rating3.setOnMouseClicked(mouseEvent -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
+                rating4.setOnMouseClicked(mouseEvent -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
+                rating5.setOnMouseClicked(mouseEvent -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
