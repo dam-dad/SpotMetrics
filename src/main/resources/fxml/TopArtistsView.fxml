@@ -43,7 +43,7 @@
          <children>
             <ImageView fx:id="img1" fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" smooth="false" style="-fx-background-radius: 100;" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.rowSpan="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@../images/bad-bunny.jpg" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <GridPane.margin>
                   <Insets />
@@ -51,38 +51,53 @@
                <viewport>
                   <Rectangle2D />
                </viewport>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="img2" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../images/Fonsi.jpg" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="img3" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2">
                <image>
-                  <Image url="@../images/ACDC.jpg" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="img4" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.rowSpan="2">
                <image>
-                  <Image url="@../images/LauraPausini.png" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="img5" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.rowSpan="2">
                <image>
-                  <Image url="@../images/the-rolling-stones.jpg" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
               <columnConstraints>
@@ -100,7 +115,7 @@
             </GridPane>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="TOP">
                <children>
-                  <Label fx:id="namesong1" text="Name song" textFill="WHITE">
+                  <Label fx:id="namesong1" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -113,7 +128,7 @@
                      </graphic>
                   </Label>
                   <Rating fx:id="rating1" partialRating="true" />
-                  <Label fx:id="artistname1" text="Artist name" textFill="WHITE">
+                  <Label fx:id="artistname1" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -129,7 +144,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="namesong2" text="Name song" textFill="WHITE">
+                        <Label fx:id="namesong2" text="No disponible" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -137,7 +152,7 @@
                      </children>
                   </HBox>
                   <Rating fx:id="rating2" partialRating="true" />
-                  <Label fx:id="artistname2" text="Name artist" textFill="WHITE">
+                  <Label fx:id="artistname2" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -152,7 +167,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="namesong3" text="Name song" textFill="WHITE">
+                        <Label fx:id="namesong3" text="No disponible" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -160,7 +175,7 @@
                      </children>
                   </HBox>
                   <Rating fx:id="rating3" partialRating="true" />
-                  <Label fx:id="artistname3" text="Name artist" textFill="WHITE">
+                  <Label fx:id="artistname3" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -175,7 +190,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="namesong5" text="Name song" textFill="WHITE">
+                        <Label fx:id="namesong5" text="No disponible" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -183,7 +198,7 @@
                      </children>
                   </HBox>
                   <Rating fx:id="rating5" partialRating="true" />
-                  <Label fx:id="artistname5" text="Name artist" textFill="WHITE">
+                  <Label fx:id="artistname5" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -199,7 +214,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="namesong4" text="Name song" textFill="WHITE">
+                        <Label fx:id="namesong4" text="No disponible" textFill="WHITE">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -207,7 +222,7 @@
                      </children>
                   </HBox>
                   <Rating fx:id="rating4" partialRating="true" />
-                  <Label fx:id="artistname4" contentDisplay="CENTER" text="Name artist" textFill="WHITE">
+                  <Label fx:id="artistname4" contentDisplay="CENTER" text="No disponible" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font></Label>

@@ -1,5 +1,7 @@
 package spot.controller;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
@@ -169,6 +172,11 @@ public class TopArtistsController implements Initializable {
                 img4.setEffect(dropShadow);
                 img5.setEffect(dropShadow);
 
+                addHoverEffect(img1);
+                addHoverEffect(img2);
+                addHoverEffect(img3);
+                addHoverEffect(img4);
+                addHoverEffect(img5);
 
                 // Aplicar la fuente a todos los Label
                 SpotMetrics.getStyleClass().add("fuentetit");
@@ -209,6 +217,28 @@ public class TopArtistsController implements Initializable {
     @FXML
     void onVolver(ActionEvent event) {
         AppMain.getRootController().showMain();
+    }
+
+    private void addHoverEffect(ImageView imageView) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), imageView);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), imageView);
+        translateTransition.setToY(-10);
+
+        imageView.setOnMouseEntered(event -> {
+            scaleTransition.playFromStart();
+            translateTransition.playFromStart();
+        });
+
+        imageView.setOnMouseExited(event -> {
+            scaleTransition.stop();
+            translateTransition.stop();
+            imageView.setScaleX(1.0);
+            imageView.setScaleY(1.0);
+            imageView.setTranslateY(0);
+        });
     }
 
 }

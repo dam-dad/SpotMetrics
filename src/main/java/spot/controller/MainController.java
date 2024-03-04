@@ -1,5 +1,7 @@
 package spot.controller;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.main.AppMain;
@@ -96,40 +99,33 @@ public class MainController implements Initializable {
         dropShadow.setRadius(20); // Ajusta el radio de la sombra según lo deseado
         dropShadow.setColor(Color.GRAY); // Ajusta el color de la sombra según lo deseado
 
+        addHoverEffect(ImageTopArtists);
+        addHoverEffect(ImageTopTracks);
+        addHoverEffect(ImageSongs);
+
         ImageTopArtists.setEffect(dropShadow);
         ImageTopTracks.setEffect(dropShadow);
         ImageSongs.setEffect(dropShadow);
+
+        addHoverEffect(ImageTopArtists);
+        addHoverEffect(ImageTopTracks);
+        addHoverEffect(ImageSongs);
+
+        ImageTopTracks.setOnMouseClicked(event -> {
+            AppMain.getRootController().updateView(topTracksController.getView());
+        });
+
+        ImageTopArtists.setOnMouseClicked(event -> {
+            AppMain.getRootController().updateView(topArtistsController.getView());
+        });
+
+        ImageSongs.setOnMouseClicked(event -> {
+            AppMain.getRootController().updateView(recommendedTracksController.getView());
+        });
     }
 
     public BorderPane getView() {
         return view;
-    }
-
-    @FXML
-    void onTopArtists(ActionEvent event) {
-        try {
-            AppMain.getRootController().updateView(topArtistsController.getView());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void onTopTracks(ActionEvent event) {
-        try {
-            AppMain.getRootController().updateView(topTracksController.getView());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void onRecommended(ActionEvent event) {
-        try {
-            AppMain.getRootController().updateView(recommendedTracksController.getView());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
@@ -141,6 +137,28 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void addHoverEffect(ImageView imageView) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), imageView);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(200), imageView);
+        translateTransition.setToY(-10);
+
+        imageView.setOnMouseEntered(event -> {
+            scaleTransition.playFromStart();
+            translateTransition.playFromStart();
+        });
+
+        imageView.setOnMouseExited(event -> {
+            scaleTransition.stop();
+            translateTransition.stop();
+            imageView.setScaleX(1.0);
+            imageView.setScaleY(1.0);
+            imageView.setTranslateY(0);
+        });
     }
 
 }

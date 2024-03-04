@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,7 +19,7 @@
          <children>
             <ImageView fx:id="UserImage" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Downloads/descarga_2.png" />
+                  <Image url="@../images/descarga%20(2).png" />
                </image>
                <VBox.margin>
                   <Insets left="13.0" />
@@ -87,18 +86,14 @@
          <children>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onRecommended" style="-fx-background-color: #121212;">
-                     <graphic>
-                        <ImageView fx:id="ImageSongs" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/descarga.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ImageView fx:id="ImageSongs" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/descarga.jpg" />
+                     </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
+                  </ImageView>
                   <Label styleClass="fuente" text="Canciones recomendadas" textFill="#d4d4d4">
                      <font>
                         <Font size="20.0" />
@@ -112,18 +107,14 @@
             </Label>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onTopArtists" style="-fx-background-color: #121212;">
-                     <graphic>
-                        <ImageView fx:id="ImageTopArtists" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/ww%20-%20copia.jpg" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ImageView fx:id="ImageTopArtists" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ww%20-%20copia.jpg" />
+                     </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
+                  </ImageView>
                   <Label styleClass="fuente" text="Top artistas" textFill="#d4d4d4">
                      <font>
                         <Font size="20.0" />
@@ -133,18 +124,14 @@
             </VBox>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onTopTracks" style="-fx-background-color: #121212;">
-                     <graphic>
-                        <ImageView fx:id="ImageTopTracks" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/5c479ec77f2ed1d88504f93cfb840b98-removebg-preview.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <ImageView fx:id="ImageTopTracks" fitHeight="220.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/5c479ec77f2ed1d88504f93cfb840b98-removebg-preview.png" />
+                     </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button>
+                  </ImageView>
                   <Label styleClass="fuente" text="Top canciones" textFill="#d4d4d4">
                      <font>
                         <Font size="20.0" />

@@ -6,16 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import spot.api.SpotifyApi;
-import spot.api.model.Token;
 import spot.api.model.recommendations.Track;
 import spot.api.model.toptracks.Item;
+import spot.api.model.Token;
 import spot.main.AppMain;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,6 +44,21 @@ public class RecommendedTracksController implements Initializable {
 
     @FXML
     private Label artistname5;
+
+    @FXML
+    private HBox background1;
+
+    @FXML
+    private HBox background2;
+
+    @FXML
+    private GridPane background3;
+
+    @FXML
+    private GridPane background4;
+
+    @FXML
+    private GridPane background5;
 
     @FXML
     private ImageView img1;
@@ -95,6 +114,25 @@ public class RecommendedTracksController implements Initializable {
 
        api.setToken(accessToken);
 
+        // Aplicar el efecto de sombra a cada ImageView
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10); // Ajusta el radio de la sombra según lo deseado
+        dropShadow.setColor(Color.WHITE); // Ajusta el color de la sombra según lo deseado
+
+        background1.setOnMouseEntered(event -> background1.setEffect(dropShadow));
+        background1.setOnMouseExited(event -> background1.setEffect(null));
+
+        background2.setOnMouseEntered(event -> background2.setEffect(dropShadow));
+        background2.setOnMouseExited(event -> background2.setEffect(null));
+
+        background3.setOnMouseEntered(event -> background3.setEffect(dropShadow));
+        background3.setOnMouseExited(event -> background3.setEffect(null));
+
+        background4.setOnMouseEntered(event -> background4.setEffect(dropShadow));
+        background4.setOnMouseExited(event -> background4.setEffect(null));
+
+        background5.setOnMouseEntered(event -> background5.setEffect(dropShadow));
+        background5.setOnMouseExited(event -> background5.setEffect(null));
 
         try {
             canciones = api.getTopTracks();
@@ -137,11 +175,6 @@ public class RecommendedTracksController implements Initializable {
                     artistImages[i].setOnMouseExited(event -> artistImages[index].setCursor(Cursor.DEFAULT));
                 }
             }
-            
-            
-            
-            
-            System.out.println("La recomendacion es : " + recomendaciones.get(0).getName());
 
         } catch (IOException e) {
             e.printStackTrace();

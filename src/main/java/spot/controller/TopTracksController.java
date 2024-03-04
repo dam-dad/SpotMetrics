@@ -116,12 +116,6 @@ public class TopTracksController implements Initializable {
         dropShadow.setRadius(10); // Ajusta el radio de la sombra según lo deseado
         dropShadow.setColor(Color.WHITE); // Ajusta el color de la sombra según lo deseado
 
-        // background1.setEffect(dropShadow);
-       /* background2.setEffect(dropShadow);
-        background3.setEffect(dropShadow);
-        background4.setEffect(dropShadow);
-        background5.setEffect(dropShadow);*/
-
         background1.setOnMouseEntered(event -> background1.setEffect(dropShadow));
         background1.setOnMouseExited(event -> background1.setEffect(null));
         
@@ -142,48 +136,41 @@ public class TopTracksController implements Initializable {
             String[] idsCanciones = new String[canciones.size()];
 
             for (int i = 0; i < canciones.size(); i++) {
-
                 idsCanciones[i] = canciones.get(i).getId();
-
-
             }
 
             for (int i = 0; i < canciones.size(); i++) {
-
                 System.out.println(idsCanciones[i]);
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        try {
+        canciones = api.getTopTracks();
 
+        Label[] namesongs = {namesong1, namesong2, namesong3, namesong4, namesong5};
+        Label[] artistnames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+        ImageView[] imageViews = {img1, img2, img3, img4, img5};
 
-            try {
-            canciones = api.getTopTracks();
-
-            Label[] namesongs = {namesong1, namesong2, namesong3, namesong4, namesong5};
-            Label[] artistnames = {artistname1, artistname2, artistname3, artistname4, artistname5};
-            ImageView[] imageViews = {img1, img2, img3, img4, img5};
-
-            for (int i = 0; i < canciones.size(); i++) {
-                if (i < namesongs.length) {
-                    canciones.get(i).getId();
-                    namesongs[i].setText(canciones.get(i).getName());
-                    artistnames[i].setText(canciones.get(i).getAlbum().getArtists().get(0).getName());
-                    setImageViewFromUrl(imageViews[i], canciones.get(i).getAlbum().getImages().get(0).getUrl());
-                    int finalI = i; // Variable final para usar en la expresión lambda
-                    imageViews[i].setOnMouseClicked(event -> {
-                        try {
-                            // Abrir el enlace en el navegador web predeterminado
-                            Desktop.getDesktop().browse(new URI(canciones.get(finalI).getExternalUrls().getSpotify()));
-                        } catch (IOException | URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }
+        for (int i = 0; i < canciones.size(); i++) {
+            if (i < namesongs.length) {
+                canciones.get(i).getId();
+                namesongs[i].setText(canciones.get(i).getName());
+                artistnames[i].setText(canciones.get(i).getAlbum().getArtists().get(0).getName());
+                setImageViewFromUrl(imageViews[i], canciones.get(i).getAlbum().getImages().get(0).getUrl());
+                int finalI = i; // Variable final para usar en la expresión lambda
+                imageViews[i].setOnMouseClicked(event -> {
+                    try {
+                        // Abrir el enlace en el navegador web predeterminado
+                        Desktop.getDesktop().browse(new URI(canciones.get(finalI).getExternalUrls().getSpotify()));
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
+        }
 
         } catch (IOException e) {
             e.printStackTrace();
