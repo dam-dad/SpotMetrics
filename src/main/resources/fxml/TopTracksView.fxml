@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="800.0" minWidth="1100.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,7 +31,7 @@
          <children>
             <ImageView fx:id="img1" fitHeight="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/5532bf65750e21ce7d6885ba29fefffe.jpg" />
+                  <Image url="@../../../../../../../Downloads/placeholder.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -42,7 +42,7 @@
             </ImageView>
             <ImageView fx:id="img2" fitHeight="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/5532bf65750e21ce7d6885ba29fefffe.jpg" />
+                  <Image url="@../../../../../../../Downloads/placeholder.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -53,7 +53,7 @@
             </ImageView>
             <ImageView fx:id="img3" fitHeight="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/5532bf65750e21ce7d6885ba29fefffe.jpg" />
+                  <Image url="@../../../../../../../Downloads/placeholder.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -64,7 +64,7 @@
             </ImageView>
             <ImageView fx:id="img4" fitHeight="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/5532bf65750e21ce7d6885ba29fefffe.jpg" />
+                  <Image url="@../../../../../../../Downloads/placeholder.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -75,7 +75,7 @@
             </ImageView>
             <ImageView fx:id="img5" fitHeight="130.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../images/5532bf65750e21ce7d6885ba29fefffe.jpg" />
+                  <Image url="@../../../../../../../Downloads/placeholder.jpg" />
                </image>
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -84,96 +84,82 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <HBox fx:id="background1" style="-fx-background-color: rgba(128, 128, 128, 0.1);;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
                <children>
-                  <Label text="1." textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label GridPane.rowIndex="2" />
-                  <Label fx:id="namesong1" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label fx:id="artistname1" text="Artist name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
+                  <GridPane prefHeight="134.0" prefWidth="737.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="NEVER" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <Label styleClass="fuente" text="1." textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label GridPane.rowIndex="2" />
+                        <Label fx:id="namesong1" styleClass="fuente" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="artistname1" styleClass="fuentesub" text="Artist name" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="2." textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label fx:id="namesong2" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label fx:id="artistname2" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
-               </children>
+            </HBox>
+            <HBox fx:id="background2" style="-fx-background-color: rgba(128, 128, 128, 0.1);;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
-            </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-              <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
                <children>
-                  <Label text="3." textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label fx:id="namesong3" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <Label fx:id="artistname3" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Label>
+                  <GridPane prefHeight="134.0" prefWidth="724.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="NEVER" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label styleClass="fuente" text="2." textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="namesong2" styleClass="fuente" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="artistname2" styleClass="fuentesub" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+            </HBox>
+            <GridPane fx:id="background3" style="-fx-background-color: rgba(128, 128, 128, 0.1);;" GridPane.columnIndex="1" GridPane.rowIndex="3">
               <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -184,15 +170,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="4." textFill="WHITE">
+                  <Label styleClass="fuente" text="3." textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <Label fx:id="namesong4" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
+                  <Label fx:id="namesong3" styleClass="fuente" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <Label fx:id="artistname4" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="artistname3" styleClass="fuentesub" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -201,7 +187,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </GridPane>
-            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <GridPane fx:id="background4" style="-fx-background-color: rgba(128, 128, 128, 0.1);;" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -212,15 +198,43 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="5." textFill="WHITE">
+                  <Label styleClass="fuente" text="4." textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <Label fx:id="artistname5" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="namesong4" styleClass="fuente" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="artistname4" styleClass="fuentesub" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                  <Label fx:id="namesong5" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
+               </children>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </GridPane>
+            <GridPane fx:id="background5" style="-fx-background-color: rgba(128, 128, 128, 0.1);;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="fuente" text="5." textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="artistname5" styleClass="fuentesub" text="Name artist" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+                  <Label fx:id="namesong5" styleClass="fuente" text="Name song" textFill="WHITE" GridPane.columnIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
@@ -278,8 +292,14 @@
                      </children>
                   </GridPane>
                </children>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
             </HBox>
          </children>
       </GridPane>
    </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </BorderPane>

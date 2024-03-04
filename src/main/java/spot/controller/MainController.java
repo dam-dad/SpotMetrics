@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.main.AppMain;
@@ -27,6 +29,16 @@ public class MainController implements Initializable {
     private BorderPane view;
 
     private Token accessToken;
+    
+    @FXML
+    private ImageView ImageTopArtists;
+
+    @FXML
+    private ImageView ImageTopTracks;
+    
+    @FXML
+    private ImageView ImageSongs;
+
 
     TopTracksController topTracksController;
     TopArtistsController topArtistsController;
@@ -45,6 +57,8 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    	
+    	
 
         topTracksController = new TopTracksController(accessToken);
         topArtistsController = new TopArtistsController(accessToken);
@@ -76,8 +90,15 @@ public class MainController implements Initializable {
             // Manejo de otras excepciones
         	 System.err.println("Error al cargar la imagen del usuario");
         }
+        
+        // Aplicar el efecto de sombra a cada ImageView
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(20); // Ajusta el radio de la sombra según lo deseado
+        dropShadow.setColor(Color.GRAY); // Ajusta el color de la sombra según lo deseado
 
-
+        ImageTopArtists.setEffect(dropShadow);
+        ImageTopTracks.setEffect(dropShadow);
+        ImageSongs.setEffect(dropShadow);
     }
 
     public BorderPane getView() {
