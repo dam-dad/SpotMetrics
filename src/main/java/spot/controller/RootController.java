@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import spot.api.model.Token;
+import spot.main.TokenManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,7 @@ public class RootController implements Initializable {
     private LoginController loginController;
     private MainController mainController;
     private Stage primaryStage;
+    private Token accessToken;
 
     /**
      * Constructor del controlador raíz.
@@ -44,8 +46,24 @@ public class RootController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loginController = new LoginController();
-        getView().setCenter(loginController.getView());
+    	
+        // Cargar el token al iniciar la aplicación
+        String savedToken = TokenManager.loadToken();
+        if (savedToken != null) {						//Si el token existe y no es nulo lo recupero y a traves de loadToken y lo uso para inicializar mainController
+            this.accessToken = new Token();
+            accessToken.setAccessToken(savedToken);
+            mainController = new MainController(accessToken);
+            getView().setCenter(mainController.getView());
+            
+        }else { // si no existe inicializo loginController para validar usuario (Despues en login Controller se almacena)
+        	
+            loginController = new LoginController();
+            getView().setCenter(loginController.getView());
+            
+        }
+    	
+
+        
     }
 
     /**

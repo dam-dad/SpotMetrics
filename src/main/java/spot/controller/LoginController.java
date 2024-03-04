@@ -15,6 +15,7 @@ import spot.api.OAuth;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
 import spot.main.AppMain;
+import spot.main.TokenManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -101,6 +102,7 @@ public class LoginController implements Initializable {
 				System.out.println("usuario: " + spot.getUsername());
 				System.out.println("canciones: " + spot.getTopTracks().size());
 
+				TokenManager.saveToken(accessToken.toString());						//Una vez validado el usuario antes de instanciar el mainController almaceno el token
 				AppMain.getRootController().instanceMainController(accessToken);
 				AppMain.getRootController().showMain();
 			} catch (Exception e) {
