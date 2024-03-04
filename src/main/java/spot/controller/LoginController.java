@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import spot.api.OAuth;
@@ -28,6 +29,9 @@ public class LoginController implements Initializable {
 	private BorderPane view;
 
 	private Token accessToken;
+	
+    @FXML
+    private ImageView LoadingImage;
 
 	public LoginController() {
 		try {
@@ -42,10 +46,16 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		
+		hideLoadingScreen();
 	}
 
 	@FXML
 	void onLogin(ActionEvent event) throws Exception {
+		
+		
+		
+		showLoadingScreen();
 		OAuth oauth = new OAuth();
 		oauth.auth(code -> {
 			try {
@@ -64,6 +74,18 @@ public class LoginController implements Initializable {
 		});
 	}
 
+	
+	private void showLoadingScreen() {
+        // Muestra el GIF de carga
+        LoadingImage.setVisible(true);
+    }
+
+    private void hideLoadingScreen() {
+        // Oculta el GIF de carga
+        LoadingImage.setVisible(false);
+    }
+
+	
 	public BorderPane getView() {
 		return view;
 	}
