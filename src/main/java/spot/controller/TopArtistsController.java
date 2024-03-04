@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import org.controlsfx.control.Rating;
 import spot.api.SpotifyApi;
 import spot.api.model.Token;
@@ -26,6 +28,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TopArtistsController implements Initializable {
+
+    @FXML
+    private Label SpotMetrics;
 
     @FXML
     private Label artistname1;
@@ -149,15 +154,42 @@ public class TopArtistsController implements Initializable {
                 rating3.setOnMouseClicked(mouseEvent -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
                 rating4.setOnMouseClicked(mouseEvent -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
                 rating5.setOnMouseClicked(mouseEvent -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
+
+                // Cargar el archivo CSS
+                view.getStylesheets().add(getClass().getResource("/fonts/fuente.css").toExternalForm());
+
+                // Aplicar el efecto de sombra a cada ImageView
+                DropShadow dropShadow = new DropShadow();
+                dropShadow.setRadius(10); // Ajusta el radio de la sombra según lo deseado
+                dropShadow.setColor(Color.WHITE); // Ajusta el color de la sombra según lo deseado
+
+                img1.setEffect(dropShadow);
+                img2.setEffect(dropShadow);
+                img3.setEffect(dropShadow);
+                img4.setEffect(dropShadow);
+                img5.setEffect(dropShadow);
+
+
+                // Aplicar la fuente a todos los Label
+                SpotMetrics.getStyleClass().add("fuentetit");
+
+                artistname1.getStyleClass().add("fuentesub");
+                artistname2.getStyleClass().add("fuentesub");
+                artistname3.getStyleClass().add("fuentesub");
+                artistname4.getStyleClass().add("fuentesub");
+                artistname5.getStyleClass().add("fuentesub");
+
+                namesong1.getStyleClass().add("fuente");
+                namesong2.getStyleClass().add("fuente");
+                namesong3.getStyleClass().add("fuente");
+                namesong4.getStyleClass().add("fuente");
+                namesong5.getStyleClass().add("fuente");
                 
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-}
-        
-        
- 
+    }
 
     public BorderPane getView() {
         return view;

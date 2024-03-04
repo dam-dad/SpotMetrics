@@ -5,9 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
-import spot.api.model.Token;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import spot.api.model.Token;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,12 +21,14 @@ public class RootController implements Initializable {
 
     private LoginController loginController;
     private MainController mainController;
+    private Stage primaryStage;
 
-    public RootController() {
+    public RootController(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RootView.fxml"));
             loader.setController(this);
             loader.load();
+            this.primaryStage = primaryStage;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -49,23 +52,19 @@ public class RootController implements Initializable {
         Platform.runLater(() -> updateView(mainController.getView()));
     }
 
-    public void updateView(Node node)  {
+    public void updateView(Node node) {
         getView().setCenter(node);
 
         Scene scene = node.getScene();
+        if (scene != null) {
+            Stage stage = (Stage) scene.getWindow();
+            if (stage != null) {
+                // Habilitar la capacidad de cambiar el tamaño de la ventana
+                stage.setResizable(true);
 
-        // Ajustar el ancho de la escena al prefWidth del nodo
-        scene.widthProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                node.prefWidth(newValue.doubleValue());
+                // Habilitar la pantalla completa
+                stage.setFullScreen(true);
             }
-        });
-
-        // Ajustar el alto de la escena al prefHeight del nodo
-        scene.heightProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                node.prefHeight(newValue.doubleValue());
-            }
-        });
+        }
     }
 }

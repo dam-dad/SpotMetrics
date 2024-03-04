@@ -1,0 +1,20 @@
+.fuente {
+    -fx-font-family: 'GothamBold.ttf';
+    src: url('fonts/GothamBold.ttf');
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.fuentesub {
+    -fx-font-family: 'GothamBold.ttf';
+    src: url('fonts/GothamBold.ttf');
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.fuentetit {
+    -fx-font-family: 'GothamBold.ttf';
+    src: url('fonts/GothamBold.ttf');
+    -fx-font-size: 43px;
+    -fx-font-weight: bold;
+}
