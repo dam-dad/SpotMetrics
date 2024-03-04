@@ -143,9 +143,13 @@
 						<configuration>
 							<mainClass>spot.main.Main</mainClass>
 							<bundleJre>true</bundleJre>
+							<customizedJre>false</customizedJre>
 							<generateInstaller>true</generateInstaller>
-							<administratorRequired>true</administratorRequired>
+							<administratorRequired>false</administratorRequired>
 							<platform>windows</platform>
+							<winConfig>
+								<generateMsi>false</generateMsi>
+							</winConfig>
 						</configuration>
 					</execution>
 				</executions>
