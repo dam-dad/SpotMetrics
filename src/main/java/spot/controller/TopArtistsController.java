@@ -3,7 +3,6 @@ package spot.controller;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -30,6 +28,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de los artistas principales.
+ */
 public class TopArtistsController implements Initializable {
 
     @FXML
@@ -102,6 +103,11 @@ public class TopArtistsController implements Initializable {
 
     private Token accessToken;
 
+    /**
+     * Constructor del controlador de los artistas principales.
+     *
+     * @param accessToken El token de acceso a la API de Spotify.
+     */
     public TopArtistsController(Token accessToken) {
         this.accessToken = accessToken;
         try {
@@ -116,10 +122,8 @@ public class TopArtistsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpotifyApi api = new SpotifyApi();
-
         api.setToken(accessToken);
 
-        
         try {
             artistas = api.getTopArtists();
 
@@ -131,7 +135,7 @@ public class TopArtistsController implements Initializable {
             for (int i = 0; i < artistas.size(); i++) {
                 if (i < artistNames.length) {
                     Item artist = artistas.get(i);
-                    songNames[i].setText(artist.getName()); 
+                    songNames[i].setText(artist.getName());
                     artistNames[i].setText(String.join(", ", artist.getGenres()));
                     setImageViewFromUrl(artistImages[i], artist.getImages().get(0).getUrl());
                     ratings[i].setRating(artist.getPopularity() / 20.0);
@@ -140,26 +144,22 @@ public class TopArtistsController implements Initializable {
                         try {
                             // Abrir el enlace en el navegador web predeterminado
                             Desktop.getDesktop().browse(new URI(artist.getExternalUrls().getSpotify()));
-                        } catch (IOException  e) {
-                            ((Throwable) e).printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         } catch (URISyntaxException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+                            e.printStackTrace();
+                        }
                     });
                     // Cambiar el estado del cursor para que sea seleccionable
                     artistImages[i].setOnMouseEntered(event -> artistImages[finalI].setCursor(Cursor.HAND));
                     artistImages[i].setOnMouseExited(event -> artistImages[finalI].setCursor(Cursor.DEFAULT));
                 }
-                
+
                 rating1.setOnMouseClicked(mouseEvent -> rating1.setRating(artistas.get(0).getPopularity() / 20.0));
                 rating2.setOnMouseClicked(mouseEvent -> rating2.setRating(artistas.get(1).getPopularity() / 20.0));
                 rating3.setOnMouseClicked(mouseEvent -> rating3.setRating(artistas.get(2).getPopularity() / 20.0));
                 rating4.setOnMouseClicked(mouseEvent -> rating4.setRating(artistas.get(3).getPopularity() / 20.0));
                 rating5.setOnMouseClicked(mouseEvent -> rating5.setRating(artistas.get(4).getPopularity() / 20.0));
-
-                // Cargar el archivo CSS
-                view.getStylesheets().add(getClass().getResource("/fonts/fuente.css").toExternalForm());
 
                 // Aplicar el efecto de sombra a cada ImageView
                 DropShadow dropShadow = new DropShadow();
@@ -192,17 +192,27 @@ public class TopArtistsController implements Initializable {
                 namesong3.getStyleClass().add("fuente");
                 namesong4.getStyleClass().add("fuente");
                 namesong5.getStyleClass().add("fuente");
-                
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Obtiene la vista del controlador.
+     *
+     * @return La vista del controlador.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Establece la imagen del ImageView desde una URL.
+     *
+     * @param imageView El ImageView para el que se establecerá la imagen.
+     * @param imageUrl  La URL de la imagen.
+     */
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
         try {
             // Cargar la imagen desde la URL
@@ -214,11 +224,21 @@ public class TopArtistsController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el evento de volver al controlador principal.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     void onVolver(ActionEvent event) {
         AppMain.getRootController().showMain();
     }
 
+    /**
+     * Agrega el efecto de desplazamiento en el cambio de tamaño de las imágenes.
+     *
+     * @param imageView El ImageView al que se aplicará el efecto.
+     */
     private void addHoverEffect(ImageView imageView) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), imageView);
         scaleTransition.setToX(1.2);

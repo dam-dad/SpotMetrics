@@ -1,6 +1,5 @@
 package spot.controller;
 
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +20,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de inicio de sesión.
+ */
 public class LoginController implements Initializable {
 
 	@FXML
@@ -30,10 +32,13 @@ public class LoginController implements Initializable {
 	private BorderPane view;
 
 	private Token accessToken;
-	
-    @FXML
-    private ImageView LoadingImage;
 
+	@FXML
+	private ImageView LoadingImage;
+
+	/**
+	 * Constructor del controlador.
+	 */
 	public LoginController() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginView.fxml"));
@@ -76,6 +81,12 @@ public class LoginController implements Initializable {
 		});
 	}
 
+	/**
+	 * Manejador de eventos para el botón de inicio de sesión.
+	 *
+	 * @param event Evento de acción del botón.
+	 * @throws Exception Si ocurre un error durante el inicio de sesión.
+	 */
 	@FXML
 	void onLogin(ActionEvent event) throws Exception {
 
@@ -98,17 +109,28 @@ public class LoginController implements Initializable {
 		});
 
 	}
-	
-	private void showLoadingScreen() {
-        // Muestra el GIF de carga
-        LoadingImage.setVisible(true);
-    }
 
-    private void hideLoadingScreen() {
-        // Oculta el GIF de carga
-        LoadingImage.setVisible(false);
-    }
-	
+	/**
+	 * Muestra la pantalla de carga.
+	 */
+	private void showLoadingScreen() {
+		// Muestra el GIF de carga
+		LoadingImage.setVisible(true);
+	}
+
+	/**
+	 * Oculta la pantalla de carga.
+	 */
+	private void hideLoadingScreen() {
+		// Oculta el GIF de carga
+		LoadingImage.setVisible(false);
+	}
+
+	/**
+	 * Obtiene la vista asociada al controlador.
+	 *
+	 * @return La vista del controlador.
+	 */
 	public BorderPane getView() {
 		return view;
 	}

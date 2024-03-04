@@ -2,7 +2,6 @@ package spot.controller;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +22,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista principal de la aplicación.
+ */
 public class MainController implements Initializable {
 
     @FXML
@@ -32,21 +34,25 @@ public class MainController implements Initializable {
     private BorderPane view;
 
     private Token accessToken;
-    
+
     @FXML
     private ImageView ImageTopArtists;
 
     @FXML
     private ImageView ImageTopTracks;
-    
+
     @FXML
     private ImageView ImageSongs;
 
+    private TopTracksController topTracksController;
+    private TopArtistsController topArtistsController;
+    private RecommendedTracksController recommendedTracksController;
 
-    TopTracksController topTracksController;
-    TopArtistsController topArtistsController;
-    RecommendedTracksController recommendedTracksController;
-
+    /**
+     * Constructor del controlador principal.
+     *
+     * @param accessToken Token de acceso a la API de Spotify.
+     */
     public MainController(Token accessToken) {
         this.accessToken = accessToken;
         try {
@@ -60,22 +66,18 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	
-    	
-
         topTracksController = new TopTracksController(accessToken);
         topArtistsController = new TopArtistsController(accessToken);
         recommendedTracksController = new RecommendedTracksController(accessToken);
 
         SpotifyApi spot = new SpotifyApi();
-
         spot.setToken(accessToken);
 
         try {
             String userImageUrl = spot.getUserImage();
             if (userImageUrl != null && !userImageUrl.isEmpty()) {
                 setImageViewFromUrl(UserImage, userImageUrl);
-                
+
                 UserImage.setOnMouseClicked(event -> {
                     try {
                         // Abrir el enlace en el navegador web predeterminado
@@ -91,9 +93,9 @@ public class MainController implements Initializable {
             // Podrías mostrar un mensaje de error al usuario
         } catch (Exception e) {
             // Manejo de otras excepciones
-        	 System.err.println("Error al cargar la imagen del usuario");
+            System.err.println("Error al cargar la imagen del usuario");
         }
-        
+
         // Aplicar el efecto de sombra a cada ImageView
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(20); // Ajusta el radio de la sombra según lo deseado
@@ -106,10 +108,6 @@ public class MainController implements Initializable {
         ImageTopArtists.setEffect(dropShadow);
         ImageTopTracks.setEffect(dropShadow);
         ImageSongs.setEffect(dropShadow);
-
-        addHoverEffect(ImageTopArtists);
-        addHoverEffect(ImageTopTracks);
-        addHoverEffect(ImageSongs);
 
         ImageTopTracks.setOnMouseClicked(event -> {
             AppMain.getRootController().updateView(topTracksController.getView());
@@ -124,10 +122,21 @@ public class MainController implements Initializable {
         });
     }
 
+    /**
+     * Obtiene la vista asociada al controlador.
+     *
+     * @return La vista del controlador.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Establece la imagen en un ImageView desde una URL.
+     *
+     * @param imageView El ImageView donde se establecerá la imagen.
+     * @param imageUrl  La URL de la imagen.
+     */
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
         try {
             // Cargar la imagen desde la URL
@@ -139,6 +148,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Agrega el efecto de hover a un ImageView.
+     *
+     * @param imageView El ImageView al que se agregará el efecto de hover.
+     */
     private void addHoverEffect(ImageView imageView) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), imageView);
         scaleTransition.setToX(1.2);
@@ -160,5 +174,4 @@ public class MainController implements Initializable {
             imageView.setTranslateY(0);
         });
     }
-
 }

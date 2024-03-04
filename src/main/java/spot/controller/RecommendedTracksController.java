@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de las canciones recomendadas.
+ */
 public class RecommendedTracksController implements Initializable {
 
     @FXML
@@ -97,6 +100,11 @@ public class RecommendedTracksController implements Initializable {
 
     private Token accessToken;
 
+    /**
+     * Constructor del controlador de canciones recomendadas.
+     *
+     * @param accessToken El token de acceso a la API de Spotify.
+     */
     public RecommendedTracksController(Token accessToken) {
         this.accessToken = accessToken;
         try {
@@ -112,7 +120,7 @@ public class RecommendedTracksController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SpotifyApi api = new SpotifyApi();
 
-       api.setToken(accessToken);
+        api.setToken(accessToken);
 
         // Aplicar el efecto de sombra a cada ImageView
         DropShadow dropShadow = new DropShadow();
@@ -143,7 +151,6 @@ public class RecommendedTracksController implements Initializable {
 
             List<Track> recomendaciones = api.getRecommendations(idsCanciones);
 
-            
             for (int i = 0; i < recomendaciones.size(); i++) {
                 if (i < 5) {
                     Track track = recomendaciones.get(i);
@@ -151,7 +158,7 @@ public class RecommendedTracksController implements Initializable {
                     Label[] songNames = {namesong1, namesong2, namesong3, namesong4, namesong5};
                     ImageView[] artistImages = {img1, img2, img3, img4, img5};
 
-                    songNames[i].setText(track.getName()); 
+                    songNames[i].setText(track.getName());
                     artistNames[i].setText(String.join(", ", track.getAlbum().getArtists().get(0).getName()));
                     setImageViewFromUrl(artistImages[i], track.getAlbum().getImages().get(0).getUrl());
 
@@ -159,13 +166,8 @@ public class RecommendedTracksController implements Initializable {
                     artistImages[i].setOnMouseClicked(event -> {
                         try {
                             // Abrir el enlace en el navegador web predeterminado
-                            try {
-								Desktop.getDesktop().browse(new URI(track.getExternalUrls().getSpotify()));
-							} catch (URISyntaxException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                        } catch (IOException  e) {
+                            Desktop.getDesktop().browse(new URI(track.getExternalUrls().getSpotify()));
+                        } catch (IOException | URISyntaxException e) {
                             e.printStackTrace();
                         }
                     });
@@ -178,13 +180,24 @@ public class RecommendedTracksController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-       }
+        }
     }
 
+    /**
+     * Obtiene la vista asociada al controlador.
+     *
+     * @return La vista del controlador.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Establece la imagen en un ImageView desde una URL.
+     *
+     * @param imageView El ImageView donde se establecerá la imagen.
+     * @param imageUrl  La URL de la imagen.
+     */
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
         try {
             // Cargar la imagen desde la URL
@@ -196,6 +209,11 @@ public class RecommendedTracksController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el evento de volver a la vista principal.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     void onVolver(ActionEvent event) {
         AppMain.getRootController().showMain();

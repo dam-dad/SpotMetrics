@@ -13,8 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import spot.api.SpotifyApi;
-import spot.api.model.toptracks.Item;
 import spot.api.model.Token;
+import spot.api.model.toptracks.Item;
 import spot.main.AppMain;
 
 import java.awt.*;
@@ -25,8 +25,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de las principales pistas.
+ */
 public class TopTracksController implements Initializable {
-	
+
     @FXML
     private HBox background1;
 
@@ -53,7 +56,7 @@ public class TopTracksController implements Initializable {
 
     @FXML
     private Label artistname4;
-    
+
     @FXML
     private Label artistname5;
 
@@ -94,6 +97,11 @@ public class TopTracksController implements Initializable {
 
     private Token accessToken;
 
+    /**
+     * Constructor del controlador de las principales pistas.
+     *
+     * @param accessToken El token de acceso a la API de Spotify.
+     */
     public TopTracksController(Token accessToken) {
         this.accessToken = accessToken;
         try {
@@ -108,9 +116,8 @@ public class TopTracksController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpotifyApi api = new SpotifyApi();
-
         api.setToken(accessToken);
-        
+
         // Aplicar el efecto de sombra a cada ImageView
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(10); // Ajusta el radio de la sombra según lo deseado
@@ -118,59 +125,43 @@ public class TopTracksController implements Initializable {
 
         background1.setOnMouseEntered(event -> background1.setEffect(dropShadow));
         background1.setOnMouseExited(event -> background1.setEffect(null));
-        
+
         background2.setOnMouseEntered(event -> background2.setEffect(dropShadow));
         background2.setOnMouseExited(event -> background2.setEffect(null));
-        
+
         background3.setOnMouseEntered(event -> background3.setEffect(dropShadow));
-        background3.setOnMouseExited(event -> background3.setEffect(null));     
-        
+        background3.setOnMouseExited(event -> background3.setEffect(null));
+
         background4.setOnMouseEntered(event -> background4.setEffect(dropShadow));
         background4.setOnMouseExited(event -> background4.setEffect(null));
-        
+
         background5.setOnMouseEntered(event -> background5.setEffect(dropShadow));
         background5.setOnMouseExited(event -> background5.setEffect(null));
 
         try {
             canciones = api.getTopTracks();
-            String[] idsCanciones = new String[canciones.size()];
+
+            Label[] namesongs = {namesong1, namesong2, namesong3, namesong4, namesong5};
+            Label[] artistnames = {artistname1, artistname2, artistname3, artistname4, artistname5};
+            ImageView[] imageViews = {img1, img2, img3, img4, img5};
 
             for (int i = 0; i < canciones.size(); i++) {
-                idsCanciones[i] = canciones.get(i).getId();
+                if (i < namesongs.length) {
+                    canciones.get(i).getId();
+                    namesongs[i].setText(canciones.get(i).getName());
+                    artistnames[i].setText(canciones.get(i).getAlbum().getArtists().get(0).getName());
+                    setImageViewFromUrl(imageViews[i], canciones.get(i).getAlbum().getImages().get(0).getUrl());
+                    int finalI = i; // Variable final para usar en la expresión lambda
+                    imageViews[i].setOnMouseClicked(event -> {
+                        try {
+                            // Abrir el enlace en el navegador web predeterminado
+                            Desktop.getDesktop().browse(new URI(canciones.get(finalI).getExternalUrls().getSpotify()));
+                        } catch (IOException | URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
-
-            for (int i = 0; i < canciones.size(); i++) {
-                System.out.println(idsCanciones[i]);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-        canciones = api.getTopTracks();
-
-        Label[] namesongs = {namesong1, namesong2, namesong3, namesong4, namesong5};
-        Label[] artistnames = {artistname1, artistname2, artistname3, artistname4, artistname5};
-        ImageView[] imageViews = {img1, img2, img3, img4, img5};
-
-        for (int i = 0; i < canciones.size(); i++) {
-            if (i < namesongs.length) {
-                canciones.get(i).getId();
-                namesongs[i].setText(canciones.get(i).getName());
-                artistnames[i].setText(canciones.get(i).getAlbum().getArtists().get(0).getName());
-                setImageViewFromUrl(imageViews[i], canciones.get(i).getAlbum().getImages().get(0).getUrl());
-                int finalI = i; // Variable final para usar en la expresión lambda
-                imageViews[i].setOnMouseClicked(event -> {
-                    try {
-                        // Abrir el enlace en el navegador web predeterminado
-                        Desktop.getDesktop().browse(new URI(canciones.get(finalI).getExternalUrls().getSpotify()));
-                    } catch (IOException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -178,10 +169,21 @@ public class TopTracksController implements Initializable {
 
     }
 
+    /**
+     * Obtiene la vista del controlador.
+     *
+     * @return La vista del controlador.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Establece la imagen del ImageView desde una URL.
+     *
+     * @param imageView El ImageView para el que se establecerá la imagen.
+     * @param imageUrl  La URL de la imagen.
+     */
     private void setImageViewFromUrl(ImageView imageView, String imageUrl) {
         try {
             // Cargar la imagen desde la URL
@@ -193,6 +195,11 @@ public class TopTracksController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el evento de volver al controlador principal.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     void onVolver(ActionEvent event) {
         AppMain.getRootController().showMain();

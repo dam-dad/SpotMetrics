@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador raíz que gestiona la navegación entre las diferentes vistas de la aplicación.
+ */
 public class RootController implements Initializable {
 
     @FXML
@@ -23,6 +26,11 @@ public class RootController implements Initializable {
     private MainController mainController;
     private Stage primaryStage;
 
+    /**
+     * Constructor del controlador raíz.
+     *
+     * @param primaryStage El escenario principal de la aplicación.
+     */
     public RootController(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RootView.fxml"));
@@ -40,18 +48,36 @@ public class RootController implements Initializable {
         getView().setCenter(loginController.getView());
     }
 
+    /**
+     * Obtiene el panel raíz de la aplicación.
+     *
+     * @return El panel raíz.
+     */
     public BorderPane getView() {
         return view;
     }
 
+    /**
+     * Instancia el controlador principal con el token de acceso proporcionado.
+     *
+     * @param accessToken El token de acceso a la API de Spotify.
+     */
     public void instanceMainController(Token accessToken) {
         this.mainController = new MainController(accessToken);
     }
 
+    /**
+     * Muestra la vista principal de la aplicación.
+     */
     public void showMain() {
         Platform.runLater(() -> updateView(mainController.getView()));
     }
 
+    /**
+     * Actualiza la vista actual del panel raíz con el nodo proporcionado.
+     *
+     * @param node El nodo que se mostrará en la vista.
+     */
     public void updateView(Node node) {
         getView().setCenter(node);
 
@@ -67,4 +93,5 @@ public class RootController implements Initializable {
             }
         }
     }
+
 }
