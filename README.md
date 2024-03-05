@@ -1,2 +1,2 @@
 # SpotMetrics
- En este proyecto tipo Maven intentamos que funcione la API
+SpotMetrics aprovecha la API de Spotify para proporcionar una experiencia integral de análisis y visualización de métricas de escucha. Desarrollado utilizando Java y JavaFX, esta aplicación ofrece una interfaz intuitiva y eficiente que te permite explorar tus hábitos de escucha, artistas favoritos. Con la potencia de la API de Spotify, SpotMetrics te permite acceder a datos detallados sobre tu actividad en la plataforma y obtener recomendaciones personalizadas.
